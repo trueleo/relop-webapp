@@ -1,0 +1,177 @@
+swagger: "2.0"
+info:
+  description: EndPoint Configuration file for Swagger.
+  version: "0.1.0"
+  title: Relop Todo WebApp
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+paths:
+  /login/{hashid}:
+    get:
+      operationId: tasker.auth
+      tags:
+        - Login
+      summary: Login to your relop account
+      description: POST to this endpoint with username (email) and secret to get access token
+      parameters:
+        - name: hashid
+          in: path
+          description: user to authenticate
+          type: string
+          required: True
+      responses:
+        200:
+          description: Authenticated Successfully
+          schema:
+            properties:
+              hashid:
+                type: string
+                description: Id of the person in the database
+              username:
+                type: string
+                description: username of the person in the database
+
+  /tasker/{hashid}:
+    get:
+      operationId: tasker.read
+      tags:
+        - Tasker
+      summary: Read all task by a single account
+      description: Read all task by a single account
+      parameters:
+        - name: hashid
+          in: path
+          description: Id of the person to get
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully read person from people data operation
+          schema:
+            type: object
+            properties:
+              taskid:
+                type: string
+                description: Id of the person
+              task:
+                type: string
+                description: task created by user
+              completed:
+                type: string
+                description: status of the task
+              timestamp:
+                type: string
+                description: Creation/Update timestamp of the person record
+
+    post:
+      operationId: tasker.create
+      tags:
+        - Tasker
+      summary: Create a Task
+      description: Create a new Task
+      parameters:
+        - name: hashid
+          in: path
+          description: Id of the person to get
+          type: string
+          required: True
+        - name: todo
+          in: body
+          description: task to create
+          required: True
+          schema:
+            type: object
+            properties:
+              task:
+                type: string
+                description: topic of task to create
+              completed:
+                type: boolean
+                description: status of task
+      responses:
+        201:
+          description: Successfully created
+          schema:
+            properties:
+              task_id:
+                type: string
+                description: Id of the task
+              task:
+                type: string
+                description: content of the task
+              completed:
+                type: boolean
+                description: Last name of the person
+              timestamp:
+                type: string
+                description: Creation/Update timestamp of the person record
+
+    put:
+      operationId: tasker.update
+      tags:
+        - Tasker
+      summary: update a Task
+      description: update an existing Task
+      parameters:
+        - name: hashid
+          in: path
+          description: Id of the person to get
+          type: string
+          required: True
+        - name: todo
+          in: body
+          description: task to create
+          required: True
+          schema:
+            type: object
+            properties:
+              task_id:
+                type: integer
+                description: id of task to update
+              completed:
+                type: boolean
+                description: status of task
+      responses:
+        201:
+          description: Successfully created
+          schema:
+            properties:
+              task_id:
+                type: string
+                description: Id of the task
+              task:
+                type: string
+                description: content of the task
+              completed:
+                type: boolean
+                description: Last name of the person
+              timestamp:
+                type: string
+                description: Creation/Update timestamp of the person record
+
+  /tasker/{taskid}:
+    delete:
+      operationId: tasker.delete
+      tags:
+        - Tasker
+      summary: Delete a person from the people list
+      description: Delete a person
+      parameters:
+        # - name: hashid
+        #   in: path
+        #   type: string
+        #   description: Id of the task to delete
+        #   required: true
+        - name: taskid
+          in: path
+          type: integer
+          description: Id of the task to delete
+          required: true
+      responses:
+        200:
+          description: Successfully deleted a person
