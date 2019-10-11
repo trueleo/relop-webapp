@@ -35,6 +35,51 @@ paths:
               username:
                 type: string
                 description: username of the person in the database
+              fullname:
+                type: string
+                description: Name of person
+
+  /login/:
+    post:
+      operationId: tasker.addaccount
+      tags:
+        - Login
+      summary: Create a new account
+      description: Create a new relop account
+      parameters:
+        - name: account
+          in: body
+          description: account to create
+          required: True
+          schema:
+            type: object
+            properties:
+              hashid:
+                type: string
+                description: topic of task to create
+              username:
+                type: string
+                description: status of task
+              fullname:
+                type: string
+                description: Name of person
+      responses:
+        201:
+          description: Successfully created
+          schema:
+            properties:
+              hashid:
+                type: string
+                description: Id of the task
+              username:
+                type: string
+                description: content of the task
+              fullname:
+                type: string
+                description: Name of person
+              timestamp:
+                type: string
+                description: Creation/Update timestamp of the person record
 
   /tasker/{hashid}:
     get:
@@ -49,6 +94,11 @@ paths:
           description: Id of the person to get
           type: string
           required: True
+        - name: status
+          in: query
+          type: string
+          description: return Items for specific completed status
+          required: false
       responses:
         200:
           description: Successfully read person from people data operation
@@ -120,12 +170,12 @@ paths:
       parameters:
         - name: hashid
           in: path
-          description: Id of the person to get
+          description: Id of user
           type: string
           required: True
         - name: todo
           in: body
-          description: task to create
+          description: task to update
           required: True
           schema:
             type: object
@@ -133,6 +183,9 @@ paths:
               task_id:
                 type: integer
                 description: id of task to update
+              task:
+                type: string
+                description: updated task description
               completed:
                 type: boolean
                 description: status of task
@@ -154,7 +207,7 @@ paths:
                 type: string
                 description: Creation/Update timestamp of the person record
 
-  /tasker/{taskid}:
+  /tasker/{hashid}/{taskid}:
     delete:
       operationId: tasker.delete
       tags:
@@ -162,11 +215,11 @@ paths:
       summary: Delete a person from the people list
       description: Delete a person
       parameters:
-        # - name: hashid
-        #   in: path
-        #   type: string
-        #   description: Id of the task to delete
-        #   required: true
+        - name: hashid
+          in: path
+          type: string
+          description: Id of user
+          required: true
         - name: taskid
           in: path
           type: integer

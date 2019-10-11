@@ -5,8 +5,8 @@ from models import Guard, Todos
 
 # Data to initialize database with
 PEOPLE = [
-    {'hash_id': '2D6G4F', 'username': 'trueleo@pm.me'},
-    {'hash_id': '3G6G4F', 'username': 'rick@pm.me'}
+    {'hash_id': '2D6G4F', 'username': 'trueleo@pm.me', 'fullname': 'Satyam Singh'},
+    {'hash_id': '3G6G4F', 'username': 'rick@pm.me', 'fullname': 'Rick And Morty'}
 ]
 
 TASK = [
@@ -25,7 +25,7 @@ db.create_all()
 
 # Add new data to the database
 for person in PEOPLE:
-    p = Guard(hash_id=person['hash_id'], username=person['username'])
+    p = Guard(hash_id=person['hash_id'], username=person['username'], fullname=person['fullname'])
     db.session.add(p)
 
 for t in TASK:
