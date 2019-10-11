@@ -1,0 +1,6 @@
+FROM tiangolo/uwsgi-nginx-flask:flask
+COPY ./ /app
+WORKDIR /app/
+RUN pip install -r requirements.txt
+WORKDIR /app/relop-client/
+RUN yarn install && yarn build
