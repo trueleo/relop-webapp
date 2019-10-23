@@ -118,9 +118,11 @@ export default {
 <style scoped>
 @import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+
   .hello {
     margin: 0;
     padding: 0;
+    transition: all 1s;
   }
   .holder {
     background: rgb(255, 255, 255);
@@ -159,7 +161,7 @@ export default {
 
   i {
   align-self: flex-end;
-  padding: 10px;
+  padding: 0.4em;
   margin: 0 5px;
   border-radius: 50%;
   font-size: 2em;
@@ -172,19 +174,19 @@ export default {
     background-color: #00ff6a;
   }
   .fa-times {
-    padding: 10px 14px;
+    padding: 0.4em 0.53em;
     background-color: rgb(255, 50, 70);
   }
 
   ul li {
-    font-size: 1.4rem;
+    font-size: 1.4em;
   }
 
   .editingdiv {
     display: flex;
     justify-content: flex-start;
     align-items: baseline;
-    font-size: 1.4rem;
+    font-size: 1.55em;
     color: white;
   }
 
@@ -192,17 +194,17 @@ export default {
     background-color: rgb(245, 245, 245);
     border-radius: 40px;
     color: rgb(70, 70, 70);
-    padding: 5px 15px;
-    margin-right: 15px;
+    padding: 0.36em 0.7em;
     font-weight: 500;
   }
 
   .editingdiv input[type=text] {
     border: 0;
     padding: 10px 30px;
-    padding-left: 10px;
-    font-size: 1.4rem;
-    width: calc(100% - 150px);
+    padding-left: 0.2em;
+    margin-right: 0.7em;
+    font-size: 0.9em;
+    width: calc(100% - 6.8em);
     background-color: #006666;
     color: #fff;
     font-weight: 300;

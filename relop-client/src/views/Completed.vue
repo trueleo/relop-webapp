@@ -1,13 +1,13 @@
 <template>
     <div class="main-body page">
-        <input type="text" placeholder="Search..." >
+        <input type="text" v-model="searchtext" @input="filter()" placeholder="Search..." >
         <table class="table">
             <tr>
                 <th id="sno">#</th>
                 <th id >task</th>
                 <th>time</th>
             </tr>
-            <tr v-for="(data, index) in table" :key="index">
+            <tr v-for="(data, index) in filtertable" :key="index">
                 <td> <div> {{index + 1}} </div> </td>
                 <td>{{ data.task }}</td>
                 <td>{{ data.timestamp }}</td>
@@ -25,6 +25,8 @@ export default {
         return {
             userid: this.$parent.userhash,
             table: [],
+            filtertable: [],
+            searchtext: ''
         }
     },
 
@@ -39,8 +41,21 @@ export default {
                     task_dict['timestamp'] = date.toString().substring(0,24);
                     this.table.unshift(task_dict);
                 }
+                this.filtertable = this.table;
             });
         },
+       filter() {
+        if ( this.searchtext == '') {
+            this.filtertable = this.table;
+        }
+         var newtable = [];
+         this.table.forEach(element => {
+             if (element.task.includes(this.searchtext) || element.timestamp.includes(this.searchtext)) {
+                newtable.push(element);
+             }
+         });
+         this.filtertable = newtable
+       }
     },
     created() {
         this.getCompleted();
@@ -57,6 +72,7 @@ export default {
     flex-direction: column;
     justify-content: flex-start;
     align-items: baseline;
+    transition: all 1s;
 }
 
 input {

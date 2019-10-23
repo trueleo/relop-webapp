@@ -1,6 +1,6 @@
 <template>
 <div class="rootbody">
-<transition name="nav-anim" enter-active-class="animated fadeInDown" mode>
+<transition name="nav-anim" enter-active-class="animated fadeInDown" leave-active-class="animated slideOutLeft" mode="out-in">
 <nav v-if="authenticated">
   <p>
     <router-link to="/todo" replace> todo </router-link>
@@ -10,7 +10,7 @@
   </p>
 </nav>
 </transition>
-<transition name="router-anime" enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight">
+<transition name="router-anime" enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight" mode="out-in">
   <router-view @authenticated="setAuthenticated" @signoff="logout"> </router-view>
 </transition>
 </div>
@@ -62,6 +62,12 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+@media screen and (max-width: 600px){
+  body {
+    font-size: 0.7rem;
+  }
+}
+
 .rootbody {
   /* overflow: hidden; */
   margin: 0;
@@ -81,7 +87,8 @@ body, html {
 nav {
   background-color: rgb(75, 107, 212);
   margin: 0 auto 20px auto;
-  padding: 20px 20px 20px 20px;
+  padding: 1.2em;
+  transition: all 1s;
 }
 
 nav p {
@@ -89,20 +96,21 @@ nav p {
 }
 
 nav p * {
-  padding: 10px 20px;
+  padding: 0.5em 0.8em;
   margin-right: 15px;
   text-decoration: none;
   color: rgb(0, 110, 255);
   background: #fff;
   border-radius: 3px;
   font-weight: bold;
-  font-size: 1.4rem;
+  font-size: 1.4em;
 }
+
 nav *:nth-child(4) {
-  margin: 0;
   position: absolute;
-  right: 20px;
-  top: 26px;
+  margin-right: 0;
+  transform: translateY(-0.55em);
+  right: 0.6em;
 }
 
 .page {

@@ -2,6 +2,7 @@ FROM tiangolo/uwsgi-nginx-flask:python3.6
 COPY ./ /app
 WORKDIR /app/
 RUN pip install -r requirements.txt
+RUN python build_database.py
 # WORKDIR /app/relop-client/
 # RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 # RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list

@@ -166,12 +166,12 @@ export default {
   }
 
   .login-container h2 {
-    font-size: 3rem;
+    font-size: 3em;
     font-weight: 400;
     color: white;
-    padding: 3rem;
-    padding-top: 4rem;
-    padding-bottom: 2rem;
+    padding: 1em;
+    padding-top: 1.5em;
+    padding-bottom: 0.8em;
     margin-top: 0;
     }
 
@@ -179,6 +179,7 @@ export default {
     display: flex;
     flex-direction: row;
     height: 4em;
+    font-size: 1rem;
     align-items: center;
     justify-content: center;
   }
@@ -191,7 +192,7 @@ export default {
   }
 
   .create-container h2 {
-    font-size: 3rem;
+    font-size: 3em;
     font-weight: 400;
     color: white;
     padding: 3rem;
@@ -214,10 +215,10 @@ export default {
     border-right: unset;
     border-left: unset;
     border-bottom-color: white;
-    width: 28em;
-    vertical-align: center;
-    height: 3em;
-    padding: 3px 10px;
+    height: 57%;
+    width: 76%;
+    /* vertical-align: center; */
+    padding: 0.3em 1em;
   }
 
   .submitbutton {
@@ -228,7 +229,7 @@ export default {
     padding: 1.2em 3.2em;
     margin-top: 2em;
     margin-bottom: 2em;
-    font-size: 1rem;
+    font-size: 1em;
     font-weight: 400;
     align-self: center;
   }
