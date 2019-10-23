@@ -3,12 +3,12 @@
         <input type="text" v-model="searchtext" @input="filter()" placeholder="Search..." >
         <table class="table">
             <tr>
-                <th id="sno">#</th>
-                <th id >task</th>
-                <th>time</th>
+                <!-- <th id="sno">#</th> -->
+                <th id >TASK</th>
+                <th>TIME</th>
             </tr>
             <tr v-for="(data, index) in filtertable" :key="index">
-                <td> <div> {{index + 1}} </div> </td>
+                <!-- <td> <div> {{index + 1}} </div> </td> -->
                 <td>{{ data.task }}</td>
                 <td>{{ data.timestamp }}</td>
             </tr>
@@ -67,7 +67,7 @@ export default {
 
 .main-body {
     width: 100%;
-    margin: 3em auto;
+    margin: 0em auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -77,51 +77,51 @@ export default {
 
 input {
     margin: 0 auto;
-    margin-bottom: 30px;
-    width: 40%;
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: unset
+    width: calc(90% - 60px);
+    border: 0;
+    padding: 20px 30px;
+    font-size: 1.2em;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
 }
 
 .table {
   border-collapse: collapse;
   width: 90%;
-  margin: 10px auto;
+  margin: 0px auto;
 }
 
-.table td {
-  border: 3px solid rgb(241, 241, 241);
-  padding: 15px 10px;
+.table tr {
+    background-color: #ffffff;
 }
 
-.table th {
-    border: 5px solid rgb(69, 235, 158);
-}
+/* .table tr:nth-child(even){background-color: #effbff;} */
 
-.table tr:nth-child(even){background-color: #f2f2f2;}
-
-.table tr:hover {background-color: #ddd;}
+.table tr:hover {background-color: #dfdfdf;}
 
 
 .table th {
+    border-top: 2px solid rgb(171, 170, 241);
+  /* border: 2px solid rgb(0, 0, 0); */
   padding-top: 15px;
+  height: 1em;
   padding-bottom: 15px;
   text-align: center;
-  font-size: 1.4em;
+  font-size: 1.2em;
   font-weight: 400;
   background-color: #004646;
-  color: rgb(251, 255, 253);
+  color: rgb(255, 255, 255);
 }
 
 .table td {
+    border: 1px solid rgba(26, 26, 26, 0.575);
+    padding: 15px 10px;
     font-size: 1.2em;
     text-align: center;
-    background-color: #006666;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
-.table td:nth-child(3) {
+.table td:nth-child(2) {
     font-size: 1em;
 }
 

@@ -8,9 +8,15 @@
       <div class="version">Version: 0.1.5</div>
       <div class="author">Author:   &nbsp;  Satyam Singh ( trueleo )</div>
       <div class="links">
-        <i class="fa fa-github"></i>
-        <i class="fa fa-globe"></i>
-        <i class="fa fa-telegram"></i>
+        <a href="http://github.com/trueleo" target="_blank">
+          <i class="fa fa-github"></i>
+        </a>
+        <a href="http://trueleo.github.io" target="_blank">
+          <i class="fa fa-globe"></i>
+        </a>
+        <a href="http://telegram.me/trueleo" target="_blank">
+          <i class="fa fa-telegram"></i>
+        </a>
       </div>
     </div>
   </div>
@@ -24,16 +30,20 @@
     height: 100%;
     margin: 0 auto;
     transition: all 1s;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
   }
 
   .card {
-    border-radius: 30px;
+    /* border-radius: 10px; */
     background: white;
     width: 40%;
-    min-width: 30em;
+    min-width: 32em;
     max-width: 35em;
     height: 44em;
-    margin: 2em auto;
+    margin: 1em auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -52,7 +62,7 @@
 
   .title {
     font-size: 3em;
-    letter-spacing: 8px;
+    letter-spacing: 10px;
     line-height: 3em;
     font-weight: 600;
   }
@@ -68,19 +78,23 @@
   }
 
   .author {
-    margin-top: 3em;
+    margin-top: 5em;
     font-size: 1.2em;
   }
 
   .links {
-    margin-top: 40px;
+    margin-top: 10px;
     width: 50%;
     display: flex;
     justify-content: center;
   }
 
+  .links a{
+    color: black;
+  }
+
   .links i {
-    font-size: 4em;
+    font-size: 3em;
     margin: 5px 12px;
     border-radius: 50%;
   }

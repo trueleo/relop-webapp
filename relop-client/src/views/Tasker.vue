@@ -38,12 +38,11 @@ export default {
       editing: -1,
       edittext: '',
       tasks: [],
-      debug: ''
     }
    },
     methods: {
       getAll() {
-        this.debug = axios.get(baseurl + this.userid + '?status=todo').then(response => {
+          axios.get(baseurl + this.userid + '?status=todo').then(response => {
           var data = response.data;
           this.tasks = []
           for (let index = 0; index < data.length; index++) {
@@ -54,7 +53,7 @@ export default {
     },
 
     addTask() {
-          this.debug = axios.post(baseurl + this.userid, {completed: false, task: this.task}).then( response => {
+            axios.post(baseurl + this.userid, {completed: false, task: this.task}).then( response => {
             var data = response.data;
             this.tasks.unshift(data);
             this.task = '';
@@ -75,7 +74,7 @@ export default {
 
       updated_task.completed = true;
 
-      this.debug = axios.put(baseurl + this.userid, updated_task)
+        axios.put(baseurl + this.userid, updated_task)
       this.tasks.splice(index, 1)
     },
 
@@ -93,7 +92,7 @@ export default {
 
       updated_task.task = this.edittext;
 
-      this.debug = axios.put(baseurl + this.userid, updated_task).then(response => {
+        axios.put(baseurl + this.userid, updated_task).then(response => {
       var data = response.data;
       this.tasks.splice(index, 1, data)
       })

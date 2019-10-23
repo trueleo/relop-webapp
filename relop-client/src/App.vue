@@ -1,6 +1,6 @@
 <template>
 <div class="rootbody">
-<transition name="nav-anim" enter-active-class="animated fadeInDown" leave-active-class="animated slideOutLeft" mode="out-in">
+<transition name="nav-anim" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft" mode="out-in">
 <nav v-if="authenticated">
   <p>
     <router-link to="/todo" replace> todo </router-link>
@@ -10,7 +10,7 @@
   </p>
 </nav>
 </transition>
-<transition name="router-anime" enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight" mode="out-in">
+<transition name="nav-anim" enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight" mode="out-in">
   <router-view @authenticated="setAuthenticated" @signoff="logout"> </router-view>
 </transition>
 </div>
@@ -72,7 +72,7 @@ body {
   /* overflow: hidden; */
   margin: 0;
   padding: 0;
-  background-color: #4eabf7;
+  background-color: #11a9e6;
   background-size: auto;
   /* width: 100%; */
   height: 100%;
@@ -88,7 +88,7 @@ nav {
   background-color: rgb(75, 107, 212);
   margin: 0 auto 20px auto;
   padding: 1.2em;
-  transition: all 1s;
+  transition: all 0.5s;
 }
 
 nav p {
