@@ -107,9 +107,9 @@ export default {
           var data = response.data;
           this.$emit("authenticated", data['hash_id']);
           this.$router.replace({path:'/todo', name: "task"});
-        }).catch( error => {
-          this.loginError();
-        });
+        }).catch( () => {
+            this.loginError()
+          });
     },
     gethash(username, password) {
       const hstr = username + password;
