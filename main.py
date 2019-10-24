@@ -17,6 +17,10 @@ app.add_api("swagger.yml")
 def index():
     return render_template("index.html")
 
+@app.route('/<path:path>')
+def redirect(path):
+    return render_template("index.html")
+
 @app.route('/js/<path:path>')
 def returnjs(path):
     return send_file("templates/js/"+ path)

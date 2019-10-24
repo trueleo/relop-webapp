@@ -17,11 +17,11 @@ paths:
       tags:
         - Login
       summary: Login to your relop account
-      description: POST to this endpoint with username (email) and secret to get access token
+      description: This endpoint provides all user information when right hash is provided as parameter. 
       parameters:
         - name: hashid
           in: path
-          description: user to authenticate
+          description: identification hash of user 
           type: string
           required: True
       responses:
@@ -31,13 +31,13 @@ paths:
             properties:
               hashid:
                 type: string
-                description: Id of the person in the database
+                description: Identification hash of user
               username:
                 type: string
-                description: username of the person in the database
+                description: username of the user in the database
               fullname:
                 type: string
-                description: Name of person
+                description: Name of the user
 
   /login/:
     post:
@@ -45,7 +45,7 @@ paths:
       tags:
         - Login
       summary: Create a new account
-      description: Create a new relop account
+      description: This endpoint is used for creating new relop account
       parameters:
         - name: account
           in: body
@@ -56,13 +56,13 @@ paths:
             properties:
               hashid:
                 type: string
-                description: topic of task to create
+                description: identification hash of user
               username:
                 type: string
-                description: status of task
+                description: username for given account
               fullname:
                 type: string
-                description: Name of person
+                description: provided fullname of account holder
       responses:
         201:
           description: Successfully created
@@ -70,16 +70,16 @@ paths:
             properties:
               hashid:
                 type: string
-                description: Id of the task
+                description: Identification hash of user
               username:
                 type: string
-                description: content of the task
+                description: username of givem account
               fullname:
                 type: string
-                description: Name of person
+                description: fullname of user
               timestamp:
                 type: string
-                description: Creation/Update timestamp of the person record
+                description: creation time of account
 
   /tasker/{hashid}:
     get:
@@ -91,7 +91,7 @@ paths:
       parameters:
         - name: hashid
           in: path
-          description: Id of the person to get
+          description: Identification hash of user
           type: string
           required: True
         - name: status
@@ -107,16 +107,16 @@ paths:
             properties:
               taskid:
                 type: string
-                description: Id of the person
+                description: Identification hash of user
               task:
                 type: string
-                description: task created by user
+                description: task that is to be added to this account
               completed:
                 type: string
-                description: status of the task
+                description: status of task
               timestamp:
                 type: string
-                description: Creation/Update timestamp of the person record
+                description: timestamp of creation/updation
 
     post:
       operationId: tasker.create
@@ -127,7 +127,7 @@ paths:
       parameters:
         - name: hashid
           in: path
-          description: Id of the person to get
+          description: identification hash of user
           type: string
           required: True
         - name: todo
@@ -156,10 +156,10 @@ paths:
                 description: content of the task
               completed:
                 type: boolean
-                description: Last name of the person
+                description: status of task
               timestamp:
                 type: string
-                description: Creation/Update timestamp of the person record
+                description: Creation time of task
 
     put:
       operationId: tasker.update
@@ -170,12 +170,12 @@ paths:
       parameters:
         - name: hashid
           in: path
-          description: Id of user
+          description: Identification hash of user
           type: string
           required: True
         - name: todo
           in: body
-          description: task to update
+          description: body of task to update including task_if
           required: True
           schema:
             type: object
@@ -202,23 +202,23 @@ paths:
                 description: content of the task
               completed:
                 type: boolean
-                description: Last name of the person
+                description: status of task
               timestamp:
                 type: string
-                description: Creation/Update timestamp of the person record
+                description: updated timestamp
 
   /tasker/{hashid}/{taskid}:
     delete:
       operationId: tasker.delete
       tags:
         - Tasker
-      summary: Delete a person from the people list
-      description: Delete a person
+      summary: Delete a task based on hashid of user and taskid
+      description: Delete a task
       parameters:
         - name: hashid
           in: path
           type: string
-          description: Id of user
+          description: Identification hash of user
           required: true
         - name: taskid
           in: path
@@ -227,4 +227,4 @@ paths:
           required: true
       responses:
         200:
-          description: Successfully deleted a person
+          description: Successfully deleted a task
