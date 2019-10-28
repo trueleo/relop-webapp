@@ -224,5 +224,15 @@ export default {
     background-color: #004646;
     color: rgb(213, 214, 214);
   }
-
+  @media screen and (max-width: 600px) {
+    .holder { 
+      width: 100%;
+    }
+    ul { 
+     margin: 20px 5px;
+    }
+    .li-container {
+     border-radius: unset;
+    }
+  }
 </style>
