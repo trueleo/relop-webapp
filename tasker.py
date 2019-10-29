@@ -54,7 +54,6 @@ def create(hashid, todo):
 
 
 def update(hashid, todo):
-    print(todo)
     update_task = Todos.query.filter(
         Todos.task_id == todo['task_id']
     ).one_or_none()
