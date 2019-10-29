@@ -134,10 +134,6 @@ export default {
     align-content: center;
 }
 
-  .left {
-    /* margin: auto 0; */
-  }
-
   .right {
     padding-left: 2em;
     display: flex;
@@ -181,9 +177,6 @@ export default {
     align-items: center;
   }
 
-  .card .left {
-    /* flex-basis: 15em; */
-  }
   .card .right {
     flex-basis: 40%;
   }
@@ -237,7 +230,11 @@ export default {
     border-radius: 50%;
   }
 
-  @media screen and (max-width: 500px){
+  @media screen and (max-width: 600px){
+    .statscard, .card {
+      width: 85%;
+    }
+
     .statscard .outer, .card {
       flex-direction: column;
       justify-content: center;

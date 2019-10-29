@@ -10,7 +10,7 @@
   </p>
 </nav>
 </transition>
-<transition name="nav-anim" enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight" mode="out-in">
+<transition name="naav-anim" enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight" mode="out-in">
   <router-view @authenticated="setAuthenticated" @signoff="logout"> </router-view>
 </transition>
 </div>
@@ -49,8 +49,6 @@ export default {
                 this.authenticated = false;
             }
   },
-  components: {
-  }
 }
 </script>
 

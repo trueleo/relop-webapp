@@ -32,7 +32,7 @@
         <input class="submitbutton" type="submit" value="CREATE" @click="create">
       </div>
     </transition>
-</div>
+  </div>
   <div class="create-button" @click="tab = ( tab == 1 ? 2 : 1 );  ">
     {{ tab == 1 ? "Create New Account" : "Login To An Existing Account" }}
   </div>
@@ -146,6 +146,8 @@ export default {
     background-color: #08240077;
     color: white;
     border-radius: 30px;
+    width: 11em;
+    text-align: center;
   }
 
   .container {

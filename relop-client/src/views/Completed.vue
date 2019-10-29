@@ -124,5 +124,12 @@ input {
 .table td:nth-child(2) {
     font-size: 1em;
 }
-
+@media screen and (max-width: 600px){
+    .table {
+        width: 95%;
+    }
+    input {
+        width: calc( 95% - 60px );
+    }
+}
 </style>

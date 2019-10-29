@@ -53,11 +53,13 @@ export default {
     },
 
     addTask() {
+          if(this.task != '') {
             axios.post(baseurl + this.userid, {completed: false, task: this.task}).then( response => {
-            var data = response.data;
+              var data = response.data;
             this.tasks.unshift(data);
             this.task = '';
-          })
+            })
+          }
     },
 
     completeTask(index) {
@@ -79,26 +81,27 @@ export default {
     },
 
     editTask(index) {
-      const blacklist = ['timestamp'];
-      var dict = this.tasks[index];
-      var updated_task = {}
-
-      for (const key in dict) {
-        if (!(key in blacklist)) {
-          const value = dict[key];
-          updated_task[key] = value
+      if(this.edittext != ''){
+        const blacklist = ['timestamp'];
+        var dict = this.tasks[index];
+        var updated_task = {}
+        for (const key in dict) {
+          if (!(key in blacklist)) {
+            const value = dict[key];
+            updated_task[key] = value
+          }
         }
-      }
 
-      updated_task.task = this.edittext;
+        updated_task.task = this.edittext;
 
         axios.put(baseurl + this.userid, updated_task).then(response => {
-      var data = response.data;
-      this.tasks.splice(index, 1, data)
-      })
+          var data = response.data;
+          this.tasks.splice(index, 1, data)
+        })
 
-      this.editing = -1;
-      this.edittext = '';
+        this.editing = -1;
+        this.edittext = '';
+      }
     },
 
      remove(index) {
@@ -225,14 +228,20 @@ export default {
     color: rgb(213, 214, 214);
   }
   @media screen and (max-width: 600px) {
-    .holder { 
+    .holder {
       width: 100%;
     }
-    ul { 
-     margin: 20px 5px;
+    ul {
+     margin: 15px 5px;
+    }
+    i {
+      font-size: 1.7em;
+      margin: 0 3px;
     }
     .li-container {
-     border-radius: unset;
+      padding-left: 10px;
+      margin-bottom: 3px;
+      border-radius: unset;
     }
   }
 </style>
