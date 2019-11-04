@@ -87,7 +87,7 @@ export default {
           if ( this.newaccount.username == '')
             this.createError('Username Empty');
           else if ( this.newaccount.password.length < 8 )
-            this.createError('Password must be greater than 8 charectars');
+            this.createError('Password must be greater than 8 characters');
           else if (this.newaccount.fullname == '' )
             this.createError('Enter Your Name');
           else {
