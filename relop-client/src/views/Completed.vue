@@ -50,7 +50,7 @@ export default {
         }
          var newtable = [];
          this.table.forEach(element => {
-             if (element.task.toLowerCase().includes(this.searchtext.toLowerCase()) || element.timestamp.includes(this.searchtext)) {
+             if ( element.task.toLowerCase().includes(this.searchtext.toLowerCase()) || element.timestamp.toLowerCase().includes(this.searchtext.toLowerCase()) ) {
                 newtable.push(element);
              }
          });

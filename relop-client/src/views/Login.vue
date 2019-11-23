@@ -126,7 +126,7 @@ export default {
 }
 </script>
 <style scoped>
-    @import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
+    @import "../../node_modules/animate.css/animate.css";
 
     .rbody {
       background-image: url('../assets/background1.svg');

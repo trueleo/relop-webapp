@@ -52,5 +52,17 @@
   "description": "## Project setup ``` yarn install ```",
   "main": "babel.config.js",
   "author": "Satyam Singh",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trueleo/relop-webapp.git"
+  },
+  "keywords": [
+    "relop",
+    "todo"
+  ],
+  "bugs": {
+    "url": "https://github.com/trueleo/relop-webapp/issues"
+  },
+  "homepage": "https://github.com/trueleo/relop-webapp#readme"
 }

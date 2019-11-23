@@ -2,10 +2,10 @@
   <div class="hello page">
     <div class="holder">
         <form @submit.prevent="addTask">
-          <input class="taskinput" type="text" placeholder="Enter a task.." v-model="task" name="task">
+          <input class="taskinput" type="text" placeholder="Create a new task or Search for existing one" @input="filter()" v-model="task" name="task">
         </form>
         <ul>
-            <div class="li-container" v-for="(data, index) in tasks" :key="index">
+            <div class="li-container" v-for="(data, index) in filtertable" :key="index">
               <div class="list-item" v-if="editing != index">
               <li>{{data.task}}</li>
               <i class="fa fa-edit" v-on:click="editing = index; edittext = tasks[index].task"></i>
@@ -38,18 +38,20 @@ export default {
       editing: -1,
       edittext: '',
       tasks: [],
+      filtertable: [],
     }
    },
     methods: {
       getAll() {
           axios.get(baseurl + this.userid + '?status=todo').then(response => {
-          var data = response.data;
-          this.tasks = []
-          for (let index = 0; index < data.length; index++) {
-          var task_dict = data[index];
-          this.tasks.unshift(task_dict);
-      }
-      })
+            var data = response.data;
+            this.tasks = []
+            for (let index = 0; index < data.length; index++) {
+              var task_dict = data[index];
+              this.tasks.unshift(task_dict);
+            }
+            this.filtertable = this.tasks
+          })
     },
 
     addTask() {
@@ -60,6 +62,19 @@ export default {
             this.task = '';
             })
           }
+    },
+
+    filter() {
+        if ( this.task == '') {
+            this.filtertable = this.tasks;
+        }
+         var newtable = [];
+         this.tasks.forEach(element => {
+             if ( element.task.toLowerCase().includes(this.task.toLowerCase()) || element.timestamp.toLowerCase().includes(this.task.toLowerCase()) ) {
+                newtable.push(element);
+             }
+         });
+         this.filtertable = newtable
     },
 
     completeTask(index) {
@@ -73,10 +88,8 @@ export default {
           updated_task[key] = value
         }
       }
-
       updated_task.completed = true;
-
-        axios.put(baseurl + this.userid, updated_task)
+      axios.put(baseurl + this.userid, updated_task);
       this.tasks.splice(index, 1)
     },
 
@@ -110,16 +123,26 @@ export default {
        this.tasks.splice(index,1);
       }
     },
+
     created() {
       this.getAll();
+      this.filtertable = this.tasks
+    },
+
+    watch: {
+      task: function (val) {
+        if(val == '') {
+          this.filtertable = this.tasks
+        }
+      }
     },
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-@import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+@import "../../node_modules/animate.css/animate.css";
 
   .hello {
     margin: 0;

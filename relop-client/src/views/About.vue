@@ -54,7 +54,6 @@
 const baseurl = '/api/'
 const quotes = [
   'Good Work Get Going',
-  'Test and Learn',
   'You must be very tired',
   'Do you need a break',
   'Consistency is the key',

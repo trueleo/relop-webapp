@@ -54,7 +54,7 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
-@import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
+@import "../node_modules/animate.css/animate.css";
 
 body {
   font-family: 'Montserrat', sans-serif;
