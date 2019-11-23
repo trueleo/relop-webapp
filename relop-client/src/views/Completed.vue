@@ -18,7 +18,7 @@
 
 <script>
 import axios from 'axios';
-const baseurl = 'http://localhost:5000/api/tasker/';
+const baseurl = '/api/tasker/';
 
 export default {
     data() {
@@ -50,7 +50,7 @@ export default {
         }
          var newtable = [];
          this.table.forEach(element => {
-             if (element.task.includes(this.searchtext) || element.timestamp.includes(this.searchtext)) {
+             if (element.task.toLowerCase().includes(this.searchtext.toLowerCase()) || element.timestamp.includes(this.searchtext)) {
                 newtable.push(element);
              }
          });

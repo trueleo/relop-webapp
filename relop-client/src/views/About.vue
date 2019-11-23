@@ -51,7 +51,7 @@
 </template>
 <script>
 
-const baseurl = 'http://localhost:5000/api/'
+const baseurl = '/api/'
 const quotes = [
   'Good Work Get Going',
   'Test and Learn',

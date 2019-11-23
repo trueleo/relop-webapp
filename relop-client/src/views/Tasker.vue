@@ -25,7 +25,7 @@
 
 <script>
 
-const baseurl = 'http://localhost:5000/api/tasker/'
+const baseurl = '/api/tasker/'
 
 import axios from 'axios';
 

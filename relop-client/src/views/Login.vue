@@ -43,7 +43,7 @@
 import axios from 'axios';
 import md5 from 'blueimp-md5';
 
-const baseurl = 'http://localhost:5000/api/login/';
+const baseurl = '/api/login/';
 
 export default {
   data() {
