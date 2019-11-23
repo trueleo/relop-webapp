@@ -72,10 +72,8 @@ export default {
       setTimeout(this.resetError, 4000);
     },
     createError(msg) {
-      this.newaccount.username = '';
-      this.newaccount.fullname = '';
-      this.newaccount.password = '';
       this.errormsg = msg;
+      this.newaccount.password = '';
       this.hascreateerror = true;
       setTimeout(this.resetError, 4000);
     },
@@ -84,12 +82,17 @@ export default {
       this.hascreateerror = false;
     },
     create() {
-          if ( this.newaccount.username == '')
-            this.createError('Username Empty');
-          else if ( this.newaccount.password.length < 8 )
+      if ( this.newaccount.username == '') {
+        this.createError('Username Empty');
+            this.newaccount.username = '';
+          }
+          else if ( this.newaccount.password.length < 8 ) {
             this.createError('Password must be greater than 8 characters');
-          else if (this.newaccount.fullname == '' )
+          }
+          else if (this.newaccount.fullname == '' ) {
+            this.newaccount.fullname = '';
             this.createError('Enter Your Name');
+          }
           else {
             axios.post(baseurl, {username: this.newaccount.username, fullname: this.newaccount.fullname, hashid: this.gethash(this.newaccount.username, this.newaccount.password) }).then( response => {
               var data = response.data;
