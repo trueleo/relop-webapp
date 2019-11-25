@@ -60,11 +60,6 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-@media screen and (max-width: 600px){
-  body {
-    font-size: 0.7rem;
-  }
-}
 
 .rootbody {
   /* overflow: hidden; */
@@ -118,4 +113,16 @@ nav *:nth-child(4) {
   overflow: auto;
 }
 
+@media screen and (max-width: 600px){
+  body {
+    font-size: 0.7rem;
+  }
+}
+
+@media screen and (max-width: 500px){
+  nav p * {
+    margin-right: 8px;
+    font-size: 1.2em;
+  }
+}
 </style>
