@@ -130,6 +130,7 @@ export default {
 </script>
 <style scoped>
     @import "../../node_modules/animate.css/animate.css";
+    @import url('https://fonts.googleapis.com/css?family=Julius+Sans+One|Lexend+Deca|Righteous&display=swap');
 
     .rbody {
       background-image: url('../assets/background1.svg');
@@ -171,6 +172,7 @@ export default {
   }
 
   .login-container h2 {
+    font-family: 'Righteous';
     font-size: 3em;
     font-weight: 400;
     color: white;
@@ -197,6 +199,7 @@ export default {
   }
 
   .create-container h2 {
+    font-family: 'Lexend Deca', Arial, Helvetica, sans-serif;
     font-size: 3em;
     font-weight: 400;
     color: white;

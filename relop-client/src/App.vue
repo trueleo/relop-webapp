@@ -1,6 +1,6 @@
 <template>
 <div class="rootbody">
-<transition name="nav-anim" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft" mode="out-in">
+<!-- <transition name="nav-anim" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft" mode="out-in"> -->
 <nav v-if="authenticated">
   <p>
     <router-link to="/todo" replace> todo </router-link>
@@ -9,8 +9,8 @@
     <router-link to="/login" v-on:click.native="logout()" replace>logout</router-link>
   </p>
 </nav>
-</transition>
-<transition name="naav-anim" enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight" mode="out-in">
+<!-- </transition> -->
+<transition name="naav-anim" enter-active-class="animated slideInRight" leave-active-class="animated fadeOutDown" >
   <router-view @authenticated="setAuthenticated" @signoff="logout"> </router-view>
 </transition>
 </div>
