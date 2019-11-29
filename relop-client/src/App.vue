@@ -80,7 +80,7 @@ body, html {
 nav {
   background-color: rgb(75, 107, 212);
   margin: 0 auto 20px auto;
-  padding: 1.2em;
+  padding: 0.8em 1.2em;
   transition: all 0.5s;
 }
 
@@ -89,7 +89,7 @@ nav p {
 }
 
 nav p * {
-  padding: 0.5em 0.8em;
+  padding: 0.4em 0.6em;
   margin-right: 15px;
   text-decoration: none;
   color: rgb(0, 110, 255);
@@ -107,7 +107,7 @@ nav *:nth-child(4) {
 }
 
 .page {
-  height: 100%;
+  height: calc( 100% - 6.5em );
   position: fixed;
   width: 100%;
   overflow: auto;
@@ -122,7 +122,7 @@ nav *:nth-child(4) {
 @media screen and (max-width: 500px){
   nav p * {
     margin-right: 8px;
-    font-size: 1.2em;
+    font-size: 1.3em;
   }
 }
 </style>

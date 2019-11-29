@@ -56,11 +56,23 @@ export default {
 
     addTask() {
           if(this.task != '') {
-            axios.post(baseurl + this.userid, {completed: false, task: this.task}).then( response => {
+            if( this.task.length < 180) {
+              axios.post(baseurl + this.userid, {completed: false, task: this.task}).then( response => {
               var data = response.data;
-            this.tasks.unshift(data);
-            this.task = '';
-            })
+              this.tasks.unshift(data);
+              this.task = '';
+              })
+            }
+            else {
+              axios.post('https://del.dog/documents/', this.task).then( response => {
+                var link = response.data;
+                 axios.post(baseurl + this.userid, {completed: false, task: 'del.dog/' + link.key}).then( response => {
+                  var data = response.data;
+                  this.tasks.unshift(data);
+                  this.task = '';
+                })
+              })
+            }
           }
     },
 
@@ -151,7 +163,7 @@ export default {
   }
   .holder {
     background: rgb(255, 255, 255);
-    width: 80%;
+    width: 95%;
     margin: 0 auto;
   }
 
@@ -167,7 +179,7 @@ export default {
     padding-right: 5px;
     border-radius: 40px;
     margin-bottom: 5px;
-    background-color:#006666;
+    background-color:#233C3C;
   }
 
   .list-item {
@@ -230,7 +242,7 @@ export default {
     margin-right: 0.7em;
     font-size: 0.9em;
     width: calc(100% - 6.8em);
-    background-color: #006666;
+    background-color: #233C3C;
     color: #fff;
     font-weight: 300;
   }
@@ -242,14 +254,20 @@ export default {
     color: rgb(56, 56, 56);
   }
 
+  form {
+    position: sticky;
+    top: 0;
+  }
+
   .taskinput {
     width: calc(100% - 60px);
     border: 0;
     padding: 20px 30px;
     font-size: 1.3em;
-    background-color: #004646;
+    background-color: #213A3A;
     color: rgb(213, 214, 214);
   }
+
   @media screen and (max-width: 600px) {
     .holder {
       width: 100%;

@@ -77,48 +77,56 @@ export default {
 
 input {
     margin: 0 auto;
-    width: calc(90% - 60px);
+    width: calc(95% - 60px);
     border: 0;
     padding: 20px 30px;
     font-size: 1.2em;
+    border-bottom: 1px solid #00000014;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
+    position: sticky;
+    top: 0;
 }
 
 .table {
-  border-collapse: collapse;
-  width: 90%;
+  /* border-collapse: collapse; */
+  width: 95%;
   margin: 0px auto;
+  border-spacing: 12px;
+  background: white;
 }
 
 .table tr {
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
+
 }
 
 /* .table tr:nth-child(even){background-color: #effbff;} */
 
-.table tr:hover {background-color: #dfdfdf;}
+/* .table tr:hover {background-color: #dfdfdf;} */
 
 
 .table th {
-    border-top: 2px solid rgb(171, 170, 241);
-  /* border: 2px solid rgb(0, 0, 0); */
+  border: 3px solid rgba(171, 170, 241, 0.466);
   padding-top: 15px;
   height: 1em;
   padding-bottom: 15px;
   text-align: center;
   font-size: 1.2em;
   font-weight: 400;
-  background-color: #004646;
-  color: rgb(255, 255, 255);
+  background-color: #fff;
+  color: #2e2e2e;
+  border-radius: 50px;
 }
 
 .table td {
-    border: 1px solid rgba(26, 26, 26, 0.575);
+    border: 5px solid #213A3A;
+    border-radius: 50px;
+    background-color: #213A3A;
+    color: #fff;
     padding: 15px 10px;
     font-size: 1.2em;
     text-align: center;
-    color: rgb(0, 0, 0);
 }
 
 .table td:nth-child(2) {
@@ -126,10 +134,19 @@ input {
 }
 @media screen and (max-width: 600px){
     .table {
-        width: 95%;
+        width: 100%;
+        border-spacing: 2px;
+        /* border-collapse: collapse; */
+    }
+    .table th {
+        border: unset;
+    }
+    .table td {
+        border: 1px solid #00000000;
+        border-radius: unset;
     }
     input {
-        width: calc( 95% - 60px );
+        width: calc( 100% - 60px );
     }
 }
 </style>

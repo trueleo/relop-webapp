@@ -2,5 +2,7 @@ templates/
 __pycache__/
 *.db
 .vscode/
+.env/
 env/
 vue-client/
+relop-client/yarn.lock
