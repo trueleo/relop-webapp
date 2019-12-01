@@ -1,5 +1,10 @@
 <template>
   <div class="hello page">
+    <div v-if="isloading" class="loading">
+      <div class="logo">
+        loading...
+      </div>
+    </div>
     <div class="holder">
         <form @submit.prevent="addTask">
           <input class="taskinput" type="text" placeholder="Create a new task or Search for existing one" @input="filter()" v-model="task" name="task">
@@ -7,7 +12,8 @@
         <ul>
             <div class="li-container" v-for="(data, index) in filtertable" :key="index">
               <div class="list-item" v-if="editing != index">
-              <li>{{data.task}}</li>
+              <li v-if="data.task.includes('del.dog')"><span v-html="data.task"></span></li>
+              <li v-else>{{data.task}}</li>
               <i class="fa fa-edit" v-on:click="editing = index; edittext = tasks[index].task"></i>
               <i class="fa fa-check" v-on:click="completeTask(index)"></i>
               <i class="fa fa-times" v-on:click="remove(index)"></i>
@@ -39,6 +45,7 @@ export default {
       edittext: '',
       tasks: [],
       filtertable: [],
+      isloading: false,
     }
    },
     methods: {
@@ -56,20 +63,23 @@ export default {
 
     addTask() {
           if(this.task != '') {
+            this.isloading = true;
             if( this.task.length < 180) {
               axios.post(baseurl + this.userid, {completed: false, task: this.task}).then( response => {
               var data = response.data;
               this.tasks.unshift(data);
               this.task = '';
+              this.isloading = false;
               })
             }
             else {
               axios.post('https://del.dog/documents/', this.task).then( response => {
                 var link = response.data;
-                 axios.post(baseurl + this.userid, {completed: false, task: 'del.dog/' + link.key}).then( response => {
+                axios.post(baseurl + this.userid, {completed: false, task: this.task.substring(0,30) + ' ... more at https://del.dog/' + link.key }).then( response => {
                   var data = response.data;
                   this.tasks.unshift(data);
                   this.task = '';
+                  this.isloading = false;
                 })
               })
             }
@@ -77,8 +87,8 @@ export default {
     },
 
     filter() {
-        if ( this.task == '') {
-            this.filtertable = this.tasks;
+      if ( this.task == '') {
+        this.filtertable = this.tasks;
         }
          var newtable = [];
          this.tasks.forEach(element => {
@@ -161,6 +171,27 @@ export default {
     padding: 0;
     transition: all 1s;
   }
+
+  .loading {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 3;
+    background: rgba(33, 58, 58, 0.733);
+  }
+
+  .loading .logo {
+    height: 5em;
+    width: 5em;
+    color: white;
+    position: absolute;
+    font-size: 2em;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   .holder {
     background: rgb(255, 255, 255);
     width: 95%;
@@ -194,6 +225,11 @@ export default {
     margin-top: auto;
     margin-bottom: auto;
     margin-right: auto;
+  }
+
+  li a {
+    color: white;
+    text-decoration: none;
   }
 
   i {

@@ -1,5 +1,10 @@
 <template>
     <div class="main-body page">
+        <div v-if="isloading" class="loading">
+          <div class="logo">
+            loading...
+          </div>
+        </div>
         <input type="text" v-model="searchtext" @input="filter()" placeholder="Search..." >
         <table class="table">
             <tr>
@@ -26,12 +31,14 @@ export default {
             userid: this.$parent.userhash,
             table: [],
             filtertable: [],
-            searchtext: ''
+            searchtext: '',
+            isloading: false
         }
     },
 
     methods: {
         getCompleted() {
+            this.isloading = true
             axios.get(baseurl + this.userid + '?status=done').then(response => {
                 var data = response.data;
                 this.table = [];
@@ -42,6 +49,7 @@ export default {
                     this.table.unshift(task_dict);
                 }
                 this.filtertable = this.table;
+                this.isloading = false;
             });
         },
        filter() {
@@ -74,6 +82,26 @@ export default {
     align-items: baseline;
     transition: all 1s;
 }
+
+  .loading {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 3;
+    background: rgba(33, 58, 58, 0.733);
+  }
+
+  .loading .logo {
+    height: 5em;
+    width: 5em;
+    color: white;
+    position: absolute;
+    font-size: 2em;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
 input {
     margin: 0 auto;
