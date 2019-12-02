@@ -7,7 +7,7 @@
     </div>
     <div class="holder">
         <form @submit.prevent="addTask">
-          <input class="taskinput" type="text" placeholder="Create a new task or Search for existing one" @input="filter()" v-model="task" name="task">
+          <input class="taskinput" type="text" autocomplete="off" placeholder="Create a new task or Search for existing one" @input="filter()" v-model="task" name="task">
         </form>
         <ul>
             <div class="li-container" v-for="(data, index) in filtertable" :key="index">

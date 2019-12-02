@@ -5,7 +5,7 @@
             loading...
           </div>
         </div>
-        <input type="text" v-model="searchtext" @input="filter()" placeholder="Search..." >
+        <input type="text" autocomplete="off" v-model="searchtext" @input="filter()" placeholder="Search..." >
         <table class="table">
             <tr>
                 <!-- <th id="sno">#</th> -->

@@ -35,10 +35,14 @@ export default {
     }
   },
   mounted() {
-            if(!this.authenticated) {
-                this.$router.replace({ name: "login" });
-            }
-        },
+	if(!this.authenticated) {
+		this.$router.replace({ name: "login" });
+	}
+	this.$router.beforeEach((to, from, next) => {
+		if (!this.authenticated) next('/login')
+		else next()
+	});
+  },
   methods: {
             setAuthenticated(hashstr) {
                 this.userhash = hashstr;

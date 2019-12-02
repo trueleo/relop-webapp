@@ -7,7 +7,7 @@ class Guard(db.Model):
     hash_id = db.Column(db.String(120), primary_key=True, autoincrement=False)
     username = db.Column(db.String(40))
     fullname = db.Column(db.String(50))
-    timestamp = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     relationship_to_todos = db.relationship('Todos', lazy=True)
 
 class Todos(db.Model):
@@ -15,7 +15,7 @@ class Todos(db.Model):
     task_id = db.Column(db.Integer, primary_key=True)
     task = db.Column(db.String(200))
     completed = db.Column(db.Boolean)
-    timestamp = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     person_hash = db.Column(db.Integer, db.ForeignKey('guard.hash_id'), nullable=False)
 
 class GuardSchema(ma.ModelSchema):
