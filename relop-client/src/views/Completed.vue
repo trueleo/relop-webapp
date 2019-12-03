@@ -6,18 +6,20 @@
           </div>
         </div>
         <input type="text" autocomplete="off" v-model="searchtext" @input="filter()" placeholder="Search..." >
-        <table class="table">
-            <tr>
-                <!-- <th id="sno">#</th> -->
-                <th id >TASK</th>
-                <th>TIME</th>
-            </tr>
-            <tr v-for="(data, index) in filtertable" :key="index">
-                <!-- <td> <div> {{index + 1}} </div> </td> -->
-                <td>{{ data.task }}</td>
-                <td>{{ data.timestamp }}</td>
-            </tr>
-        </table>
+        <div class="container">
+            <ul>
+                <li v-for="(data, index) in filtertable" :key="index">
+                    <div>
+                        <span class="circle"></span>
+                        <div class="info">{{data.task}}</div>
+                        <span class="number">
+                            <span> {{data.timestamp.split(' ')[4].substring(0,5)}} </span>
+                            <span> {{data.timestamp.split(' ')[2] + " " + data.timestamp.split(' ')[1]}} </span>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -52,17 +54,29 @@ export default {
                 this.isloading = false;
             });
         },
+        matchdate(timestamp, searchtext) {
+               var included = 0;
+               timestamp.toLowerCase().split(' ').forEach(el => {
+                if(searchtext.split(' ').includes(el))
+                  included++;
+               });
+               if(included == searchtext.split(' ').length) {
+                 return true
+               }
+        },
        filter() {
-        if ( this.searchtext == '') {
+        if ( this.searchtext == '' ) {
             this.filtertable = this.table;
         }
+        else {
          var newtable = [];
          this.table.forEach(element => {
-             if ( element.task.toLowerCase().includes(this.searchtext.toLowerCase()) || element.timestamp.toLowerCase().includes(this.searchtext.toLowerCase()) ) {
-                newtable.push(element);
+             if ( element.task.toLowerCase().includes(this.searchtext.toLowerCase()) || this.matchdate(element.timestamp, this.searchtext)) {
+                 newtable.push(element);
              }
          });
          this.filtertable = newtable
+        }
        }
     },
     created() {
@@ -105,76 +119,127 @@ export default {
 
 input {
     margin: 0 auto;
-    width: calc(95% - 60px);
+    width: 90%;
     border: 0;
     padding: 20px 30px;
-    font-size: 1.2em;
+    font-size: 1.1em;
     border-bottom: 1px solid #00000014;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
     position: sticky;
+    z-index: 2;
+    border-radius: 7px;
     top: 0;
 }
 
-.table {
-  /* border-collapse: collapse; */
-  width: 95%;
+.container {
+  width: 90%;
   margin: 0px auto;
-  border-spacing: 12px;
-  background: white;
+  background: rgba(255, 255, 255, 0.192);
 }
 
-.table tr {
-    /* background-color: #ffffff; */
 
+.container ul {
+  list-style: none;
+  position: relative;
+  top: 0;
+  padding: 10px 10px 5px 7em;
+  color: rgb(255, 255, 255);
+  font-size: 1.4em;
 }
 
-/* .table tr:nth-child(even){background-color: #effbff;} */
+.container ul:before {
+  content: '';
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  border-left: 2px dashed rgba(255, 255, 255, 0.856);
 
-/* .table tr:hover {background-color: #dfdfdf;} */
-
-
-.table th {
-  border: 3px solid rgba(171, 170, 241, 0.466);
-  padding-top: 15px;
-  height: 1em;
-  padding-bottom: 15px;
-  text-align: center;
-  font-size: 1.2em;
-  font-weight: 400;
-  background-color: #fff;
-  color: #2e2e2e;
-  border-radius: 50px;
+}
+.container ul li {
+  position: relative;
+  margin-left: 2em;
+  background-color: rgba(29, 29, 29, 0.438);
+  padding: 15px 10px 15px 5px;
+  border-radius: 6px;
+  width: calc(100% - 4em);
+  /* box-shadow: 0 0 4px rgba(0, 0, 0, .12), 0 2px 2px rgba(0, 0, 0, .08) */
 }
 
-.table td {
-    border: 5px solid #213A3A;
-    border-radius: 50px;
-    background-color: #213A3A;
-    color: #fff;
-    padding: 15px 10px;
-    font-size: 1.2em;
-    text-align: center;
+.container ul li:not(:first-child) {
+  margin-top: 2em;
 }
 
-.table td:nth-child(2) {
-    font-size: 1em;
+.container ul li .circle {
+  width: 2px;
+  height: 100%;
+  background: #fff;
+  left: -2em;
+  top: 0;
+  position: absolute;
 }
+
+.container ul li .circle:before, .container ul li .circle:after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  position: absolute;
+  background: #86b7e7;
+  left: -5px;
+  top: 0;
+}
+.container ul li .circle:after {
+  top: 100%;
+}
+
+.container ul li .info {
+  margin-left: 0.8em;
+}
+
+.container .number {
+  height: 100%;
+}
+
+.container .number span {
+  position: absolute;
+  font-size: 0.7em;
+  left: -11em;
+  font-weight: bold;
+}
+
+.container .number span:first-child{
+  top: 28%;
+}
+
+.container .number span:last-child {
+    top: 60%;
+}
+
 @media screen and (max-width: 600px){
-    .table {
-        width: 100%;
-        border-spacing: 2px;
-        /* border-collapse: collapse; */
-    }
-    .table th {
-        border: unset;
-    }
-    .table td {
-        border: 1px solid #00000000;
-        border-radius: unset;
-    }
+
     input {
-        width: calc( 100% - 60px );
+        padding: 10px 20px;
+    }
+
+    .container {
+        font-size: 0.9em;
+        width: 95%;
+    }
+    .container ul {
+        padding-left: 5em;
+    }
+    .container ul li {
+        margin-left: 1em;
+    }
+    .container ul li .circle {
+        left: -1em;
+    }
+
+    .container ul .number span {
+        left: -9em;
+        font-size: 0.65em
     }
 }
 </style>

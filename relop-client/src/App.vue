@@ -106,7 +106,7 @@ nav p * {
 nav *:nth-child(4) {
   position: absolute;
   margin-right: 0;
-  transform: translateY(-0.55em);
+  transform: translateY(-0.35em);
   right: 0.6em;
 }
 

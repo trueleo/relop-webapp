@@ -1,19 +1,19 @@
 <template>
   <div class="about page">
-    <div class="statscard">
-    <vue-particles class="parjs" color="#ff3e3e"
-        :particleOpacity="0.6"
-        :particlesNumber="60"
+    <vue-particles class="parjs" color="#fff"
+        :particleOpacity="1"
+        :particlesNumber="30"
         shapeType="circle"
-        :particleSize="5"
-        linesColor="#080808"
-        :linesWidth="1.6"
+        :particleSize="25"
+        linesColor="#ffffff"
+        :linesWidth="2"
         :lineLinked="true"
-        :lineOpacity="0.4"
-        :linesDistance="140"
+        :lineOpacity="0.9"
+        :linesDistance="200"
         :moveSpeed="2"
     >
     </vue-particles>
+    <div class="statscard">
       <div class="outer">
         <div class="left">
           <div class="avatar">
@@ -136,18 +136,19 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    z-index: 2;
   }
 
   .parjs {
     position: absolute;
     width: 100%;
+    z-index: -1;
     height: 100%;
   }
 
   .statscard .outer {
     width: 90%;
     position: absolute;
-    z-index: 2;
     max-width: 40em;
     /* margin0: 0 auto; */
     left: 5%;
@@ -191,8 +192,10 @@ export default {
     min-width: 30em;
     max-width: 50em;
     padding: 16px 0px;
+    position: relative;
     /* height: 20em; */
     margin: 8em auto;
+    z-index: 2;
     display: flex;
     flex-direction: row;
     justify-content: center;
