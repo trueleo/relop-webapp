@@ -56,8 +56,36 @@ export default {
         },
         matchdate(timestamp, searchtext) {
                var included = 0;
-               timestamp.toLowerCase().split(' ').forEach(el => {
-                if(searchtext.split(' ').includes(el))
+               const day = {
+                      "mon": "monday",
+                      "tue": "tuesday",
+                      "wed": "wednesday",
+                      "thu": "thursday",
+                      "fri": "friday",
+                      "sat": "saturday",
+                      "sun": "sunday"
+               };
+               const month = {
+                      "jan": "january",
+                      "feb": "february",
+                      "mar": "march",
+                      "apr": "april",
+                      "may": "may",
+                      "jun": "june",
+                      "jul": "july",
+                      "aug": "august",
+                      "sept": "september",
+                      "oct": "october",
+                      "nov": "november",
+                      "dec": "december",
+               }
+               var tm = timestamp.toLowerCase().substring(0,15);
+               const replace_day = tm.substring(0,3);
+               const replace_month = tm.substring(4,7);
+               tm = tm.replace(replace_day, day[replace_day]);
+               tm = tm.replace(replace_month, month[replace_month]);
+               searchtext.toLowerCase().split(' ').forEach(el => {
+                if(tm.includes(el))
                   included++;
                });
                if(included == searchtext.split(' ').length) {
@@ -102,7 +130,7 @@ export default {
     width: 100vw;
     position: absolute;
     z-index: 3;
-    background: rgba(33, 58, 58, 0.733);
+    background: rgb(48, 48, 48);
   }
 
   .loading .logo {
@@ -135,7 +163,7 @@ input {
 .container {
   width: 90%;
   margin: 0px auto;
-  background: rgba(255, 255, 255, 0.192);
+  background: #ffffff;
 }
 
 
@@ -144,7 +172,6 @@ input {
   position: relative;
   top: 0;
   padding: 10px 10px 5px 7em;
-  color: rgb(255, 255, 255);
   font-size: 1.4em;
 }
 
@@ -153,13 +180,13 @@ input {
   width: 1px;
   height: 100%;
   position: absolute;
-  border-left: 2px dashed rgba(255, 255, 255, 0.856);
+  border-left: 2px dashed rgb(46, 46, 46);
 
 }
 .container ul li {
   position: relative;
   margin-left: 2em;
-  background-color: rgba(29, 29, 29, 0.438);
+  background-color: rgb(243, 243, 243);
   padding: 15px 10px 15px 5px;
   border-radius: 6px;
   width: calc(100% - 4em);
@@ -173,7 +200,7 @@ input {
 .container ul li .circle {
   width: 2px;
   height: 100%;
-  background: #fff;
+  background: rgb(10, 10, 10);
   left: -2em;
   top: 0;
   position: absolute;
@@ -184,9 +211,9 @@ input {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  border: 2px solid #fff;
+  border: 2px solid rgb(39, 39, 39);
   position: absolute;
-  background: #86b7e7;
+  background: #d9ff00;
   left: -5px;
   top: 0;
 }
@@ -205,6 +232,7 @@ input {
 .container .number span {
   position: absolute;
   font-size: 0.7em;
+  color:rgb(70, 70, 70);
   left: -11em;
   font-weight: bold;
 }
