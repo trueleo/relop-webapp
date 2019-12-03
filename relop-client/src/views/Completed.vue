@@ -221,8 +221,8 @@ input {
 
     input {
         padding: 10px 20px;
+        border-radius: unset;
     }
-
     .container {
         font-size: 0.9em;
         width: 95%;
@@ -232,14 +232,14 @@ input {
     }
     .container ul li {
         margin-left: 1em;
+        width: calc(100% - 2.5em);
     }
     .container ul li .circle {
         left: -1em;
     }
-
     .container ul .number span {
-        left: -9em;
-        font-size: 0.65em
+        left: -6em;
+        font-size: 0.8em
     }
 }
 </style>
