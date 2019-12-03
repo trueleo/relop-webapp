@@ -7,7 +7,7 @@
         </div>
         <input type="text" autocomplete="off" v-model="searchtext" @input="filter()" placeholder="Search..." >
         <div class="container">
-            <ul>
+            <ul v-if="filtertable.length > 0">
                 <li v-for="(data, index) in filtertable" :key="index">
                     <div>
                         <span class="circle"></span>
@@ -19,6 +19,9 @@
                     </div>
                 </li>
             </ul>
+            <p v-else>
+              Your Completed Tasks Will Appear Here
+            </p>
         </div>
     </div>
 </template>
@@ -164,8 +167,13 @@ input {
   width: 90%;
   margin: 0px auto;
   background: #ffffff;
+  min-height: calc(95% - 5em);
 }
 
+.container p {
+  text-align: center;
+  margin-top: 15vh;
+}
 
 .container ul {
   list-style: none;
@@ -183,6 +191,7 @@ input {
   border-left: 2px dashed rgb(46, 46, 46);
 
 }
+
 .container ul li {
   position: relative;
   margin-left: 2em;

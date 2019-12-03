@@ -124,7 +124,7 @@ export default {
     },
   },
   mounted() {
-      this.focusInput('userinput');
+      // this.focusInput('userinput');
   },
 }
 </script>

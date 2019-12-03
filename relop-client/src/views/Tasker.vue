@@ -24,7 +24,7 @@
               </div>
             </div>
         </ul>
-      <p> {{ tasks.length > 0 ? 'Looks Like You Have Some Task To Do' : 'Such Empty Much Wow'  }} </p>
+        <p> {{holdertext()}} </p>
     </div>
   </div>
 </template>
@@ -49,7 +49,17 @@ export default {
     }
    },
     methods: {
-      getAll() {
+    holdertext() {
+      if( this.task != '') {
+        if( this.filtertable.length < 1 && this.tasks.length > 0 )
+           return 'No Matching Task Found'
+      }
+      if(this.tasks.length > 0)
+        return 'Looks Like You Have Some Task To Do'
+      else
+        return 'Such Empty Much Wow'
+    },
+    getAll() {
           axios.get(baseurl + this.userid + '?status=todo').then(response => {
             var data = response.data;
             this.tasks = []
@@ -63,16 +73,15 @@ export default {
 
     addTask() {
           if(this.task != '') {
-            this.isloading = true;
             if( this.task.length < 180) {
               axios.post(baseurl + this.userid, {completed: false, task: this.task}).then( response => {
-              var data = response.data;
-              this.tasks.unshift(data);
+                var data = response.data;
               this.task = '';
-              this.isloading = false;
+              this.tasks.unshift(data);
               })
             }
             else {
+              this.isloading = true;
               axios.post('https://del.dog/documents/', this.task).then( response => {
                 var link = response.data;
                 axios.post(baseurl + this.userid, {completed: false, task: this.task.substring(0,30) + ' ... more at https://del.dog/' + link.key }).then( response => {
@@ -80,8 +89,8 @@ export default {
                   this.tasks.unshift(data);
                   this.task = '';
                   this.isloading = false;
-                })
-              })
+                });
+              });
             }
           }
     },
@@ -196,6 +205,7 @@ export default {
     background: rgb(255, 255, 255);
     width: 95%;
     margin: 0 auto;
+    min-height: 95%;
   }
 
   ul {
@@ -283,7 +293,7 @@ export default {
     font-weight: 300;
   }
 
-  p {
+ .holder p {
     text-align:center;
     font-size: 1.1em;
     padding: 40px 0px;
