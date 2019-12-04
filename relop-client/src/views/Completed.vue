@@ -19,8 +19,11 @@
                     </div>
                 </li>
             </ul>
+            <p style="font-size: 2.5em" v-else-if="table.length > 0">
+                :(
+            </p>
             <p v-else>
-              Your Completed Tasks Will Appear Here
+               Your Completed Tasks Will Appear Here
             </p>
         </div>
     </div>
@@ -167,7 +170,8 @@ input {
   width: 90%;
   margin: 0px auto;
   background: #ffffff;
-  min-height: calc(95% - 5em);
+  height: calc(100% - 6em);
+  overflow-y: scroll;
 }
 
 .container p {
@@ -263,6 +267,9 @@ input {
     .container {
         font-size: 0.9em;
         width: 95%;
+    }
+    .container p {
+        font-size: 1.2em;
     }
     .container ul {
         padding-left: 5em;
