@@ -169,11 +169,11 @@ export default {
     },
 }
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 @import "../../node_modules/animate.css/animate.css";
+@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+@import url('https://fonts.googleapis.com/css?family=Julius+Sans+One|Lexend+Deca|Righteous&display=swap');
 
   .hello {
     margin: 0;
@@ -182,23 +182,25 @@ export default {
   }
 
   .loading {
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 95%;
     position: absolute;
     z-index: 3;
-    background: rgba(33, 58, 58, 0.733);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgb(33, 58, 58);
   }
 
   .loading .logo {
-    height: 5em;
-    width: 5em;
     color: white;
-    position: absolute;
-    font-size: 2em;
+    position: relative;
+    font-size: 3em;
     z-index: 2;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-family: 'Righteous';
+    text-align: center;
   }
 
   .holder {
