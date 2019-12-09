@@ -9,8 +9,8 @@
         <form @submit.prevent="addTask">
           <input class="taskinput" type="text" autocomplete="off" placeholder="Create a new task or Search for existing one" @input="filter()" v-model="task" name="task">
         </form>
-        <ul>
-            <div class="li-container" v-for="(data, index) in filtertable" :key="index">
+           <transition-group name="list-complete" tag="ul">
+            <div class="li-container" v-for="(data, index) in computedList" :key="data.task" v-bind:data-index="index">
               <div class="list-item" v-if="editing != index">
               <li v-if="data.task.includes('del.dog')"><span v-html="data.task"></span></li>
               <li v-else>{{data.task}}</li>
@@ -23,14 +23,13 @@
                 <div @click="editTask(index)"> save </div>
               </div>
             </div>
-        </ul>
+           </transition-group>
         <p> {{holdertext()}} </p>
     </div>
   </div>
 </template>
 
 <script>
-
 const baseurl = '/api/tasker/'
 
 import axios from 'axios';
@@ -44,14 +43,22 @@ export default {
       editing: -1,
       edittext: '',
       tasks: [],
-      filtertable: [],
       isloading: false,
     }
    },
-    methods: {
+   computed: {
+     computedList: function () {
+       var vm = this;
+       return vm.tasks.filter( function (element) {
+            if ( element.task.toLowerCase().includes( vm.task.toLowerCase() ) )
+              return element;
+       })
+     }
+   },
+   methods: {
     holdertext() {
       if( this.task != '') {
-        if( this.filtertable.length < 1 && this.tasks.length > 0 )
+        if( this.computedList.length < 1 && this.tasks.length > 0 )
            return 'No Matching Task Found'
       }
       if(this.tasks.length > 0)
@@ -70,7 +77,6 @@ export default {
             this.filtertable = this.tasks
           })
     },
-
     addTask() {
           if(this.task != '') {
             if( this.task.length < 180) {
@@ -94,20 +100,6 @@ export default {
             }
           }
     },
-
-    filter() {
-      if ( this.task == '') {
-        this.filtertable = this.tasks;
-        }
-         var newtable = [];
-         this.tasks.forEach(element => {
-             if ( element.task.toLowerCase().includes(this.task.toLowerCase()) || element.timestamp.toLowerCase().includes(this.task.toLowerCase()) ) {
-                newtable.push(element);
-             }
-         });
-         this.filtertable = newtable
-    },
-
     completeTask(index) {
       const blacklist = ['timestamp'];
       var dict = this.tasks[index];
@@ -208,6 +200,7 @@ export default {
     width: 95%;
     margin: 0 auto;
     min-height: 95%;
+    overflow-x: hidden;
   }
 
   ul {
@@ -302,11 +295,6 @@ export default {
     color: rgb(56, 56, 56);
   }
 
-  form {
-    position: sticky;
-    top: 0;
-  }
-
   .taskinput {
     width: calc(100% - 60px);
     border: 0;
@@ -314,6 +302,19 @@ export default {
     font-size: 1.3em;
     background-color: #213A3A;
     color: rgb(213, 214, 214);
+  }
+
+  .list-complete-leave, .list-complete-leave-active {
+    position: absolute;
+    width: calc(95% - 95px);
+    transition: all 300ms
+  }
+  .list-complete-leave-to {
+    opacity: 0;
+    transform: translateY(-20px)
+  }
+  .list-complete-move {
+    transition: all 600ms;
   }
 
   @media screen and (max-width: 600px) {
@@ -331,6 +332,9 @@ export default {
       padding-left: 10px;
       margin-bottom: 3px;
       border-radius: unset;
+    }
+    .list-complete-leave, .list-complete-leave-active {
+      width: calc(100% - 25px);
     }
   }
 </style>
