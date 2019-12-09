@@ -5,7 +5,7 @@
             loading
           </div>
           <div class="loadingbar">
-            <bounce-loader class="loader-circle" :loading="isloading" :size="8" sizeUnit="em" color="#fff" ></bounce-loader>
+            <bounce-loader class="loading-circle" :loading="isloading" :size="8" sizeUnit="em" color="#fff" ></bounce-loader>
           </div>
         </div>
         <input type="text" autocomplete="off" v-model="searchtext" @input="filter()" placeholder="Search..." >
@@ -16,13 +16,13 @@
                         <span class="circle"></span>
                         <div class="info">{{data.task}}</div>
                         <span class="number">
-                            <span> {{data.timestamp.split(' ')[4].substring(0,5)}} </span>
-                            <span> {{data.timestamp.split(' ')[2] + " " + data.timestamp.split(' ')[1]}} </span>
+                            <span> {{data.timestamp.toString().split(' ')[4].substring(0,5)}} </span>
+                            <span> {{data.timestamp.toString().split(' ')[2] + " " + data.timestamp.toString().split(' ')[1]}} </span>
                         </span>
                     </div>
                 </li>
             </ul>
-            <p style="font-size: 2.5em" v-else-if="table.length > 0">
+            <p style="font-size: 4em; color: #535353" v-else-if="table.length > 0">
                 :(
             </p>
             <p v-else>
@@ -53,12 +53,13 @@ export default {
             axios.get(baseurl + this.userid + '?status=done').then(response => {
                 var data = response.data;
                 this.table = [];
-                for (let index = 0; index < data.length; index++) {
-                    var task_dict = data[index];
-                    var date = new Date(task_dict['timestamp'])
-                    task_dict['timestamp'] = date.toString().substring(0,24);
-                    this.table.unshift(task_dict);
-                }
+                data.forEach(element => {
+                  element.timestamp = new Date(element.timestamp)
+                });
+                this.table = data;
+                this.table.sort(function (a,b) {
+                  return a.timestamp < b.timestamp
+                })
                 this.filtertable = this.table;
                 this.isloading = false;
             });
@@ -88,7 +89,7 @@ export default {
                       "nov": "november",
                       "dec": "december",
                }
-               var tm = timestamp.toLowerCase().substring(0,15);
+               var tm = timestamp.toString().toLowerCase().substring(0,15);
                const replace_day = tm.substring(0,3);
                const replace_month = tm.substring(4,7);
                tm = tm.replace(replace_day, day[replace_day]);
@@ -272,7 +273,6 @@ input {
     .loading {
       width: 100%;
     }
-
     input {
         padding: 10px 20px;
         border-radius: unset;

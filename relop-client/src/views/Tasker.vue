@@ -5,25 +5,25 @@
         loading
       </div>
       <div class="loadingbar">
-        <bounce-loader class="loader-circle" :loading="isloading" :size="8" sizeUnit="em" color="#fff" ></bounce-loader>
+        <bounce-loader class="loading-circle" :loading="isloading" :size="8" sizeUnit="em" color="#fff" ></bounce-loader>
       </div>
     </div>
     <div class="holder">
         <form @submit.prevent="addTask">
-          <input class="taskinput" type="text" autocomplete="off" placeholder="Create a new task or Search for existing one" @input="filter()" v-model="task" name="task">
+          <input class="taskinput" type="text" autocomplete="off" placeholder="Create a new task or Search for existing one" v-model="task" name="task">
         </form>
            <transition-group name="list-complete" tag="ul">
             <div class="li-container" v-for="(data, index) in computedList" :key="data.task" v-bind:data-index="index">
-              <div class="list-item" v-if="editing != index">
+              <div class="list-item" v-if="editing != data.task_id">
               <li v-if="data.task.includes('del.dog')"><span v-html="data.task"></span></li>
               <li v-else>{{data.task}}</li>
-              <i class="fa fa-edit" v-on:click="editing = index; edittext = tasks[index].task"></i>
-              <i class="fa fa-check" v-on:click="completeTask(index)"></i>
-              <i class="fa fa-times" v-on:click="remove(index)"></i>
+              <i class="fa fa-edit" v-on:click="editing = data.task_id; edittext = data.task"></i>
+              <i class="fa fa-check" v-on:click="completeTask(data.task_id)"></i>
+              <i class="fa fa-times" v-on:click="remove(data.task_id)"></i>
               </div>
-              <div v-if="editing == index" class="editingdiv">
-                <input type="text" placeholder="Enter a task.." v-model="edittext" v-on:keyup.enter="editTask(index)" name="edit">
-                <div @click="editTask(index)"> save </div>
+              <div v-if="editing == data.task_id" class="editingdiv">
+                <input type="text" placeholder="Enter a task.." v-model="edittext" v-on:keyup.enter="editTask(data.task_id)" name="edit">
+                <div @click="editTask(data.task_id)"> save </div>
               </div>
             </div>
            </transition-group>
@@ -103,11 +103,13 @@ export default {
             }
           }
     },
-    completeTask(index) {
+    completeTask(taskid) {
       const blacklist = ['timestamp'];
-      var dict = this.tasks[index];
+      var index = this.tasks.findIndex( function (item) {
+          return item.task_id == taskid
+      })
+      var dict = this.tasks[index]
       var updated_task = {}
-
       for (const key in dict) {
         if (!(key in blacklist)) {
           const value = dict[key];
@@ -119,10 +121,13 @@ export default {
       this.tasks.splice(index, 1)
     },
 
-    editTask(index) {
-      if(this.edittext != ''){
+    editTask(taskid) {
+      if(this.edittext != '') {
         const blacklist = ['timestamp'];
-        var dict = this.tasks[index];
+        var index = this.tasks.findIndex( function (item) {
+          return item.task_id == taskid
+        });
+        var dict = this.tasks[index]
         var updated_task = {}
         for (const key in dict) {
           if (!(key in blacklist)) {
@@ -143,10 +148,13 @@ export default {
       }
     },
 
-     remove(index) {
-       var task_id = this.tasks[index].task_id
-       axios.delete( baseurl + this.userid + '/' + task_id  )
-       this.tasks.splice(index,1);
+     remove(taskid) {
+       var index = this.tasks.findIndex( function (item) {
+          return item.task_id == taskid
+       });
+       const task_id = this.tasks[index].task_id;
+       axios.delete( baseurl + this.userid + '/' + task_id  );
+       this.tasks.splice(index, 1);
       }
     },
 
@@ -319,9 +327,12 @@ export default {
     width: calc(95% - 95px);
     transition: all 300ms
   }
-  .list-complete-leave-to {
+  .list-complete-enter-active {
+    transition: all 300ms
+  }
+  .list-complete-leave-to, .list-complete-enter {
     opacity: 0;
-    transform: translateY(-20px)
+    transform: translateY(-20px);
   }
   .list-complete-move {
     transition: all 600ms;
