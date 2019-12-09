@@ -17,6 +17,46 @@ app.add_api("swagger.yml")
 def index():
     return render_template("index.html")
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_file("templates/favicon.ico")
+
+@app.route('/favicon-16x16.png')
+def favicon16():
+    return send_file("templates/favicon-16x16.png")
+
+@app.route('/favicon-32x32.png')
+def favicon32():
+    return send_file("templates/favicon-32x32.png")
+
+@app.route('/android-chrome-192x192.png')
+def android_chrome192():
+    return send_file("templates/android-chrome-192x192.png")
+
+@app.route('/android-chrome-512x512.png')
+def android_chrome512():
+    return send_file("templates/android-chrome-512x512.png")
+
+@app.route('/apple-touch-icon.png')
+def apple_touch():
+    return send_file("templates/apple-touch-icon.png")
+
+@app.route('/browserconfig.xml')
+def browserconfig():
+    return send_file("templates/browserconfig.xml")
+
+@app.route('/mstile-150x150.png')
+def mstile():
+    return send_file("templates/mstile-150x150.png")
+
+@app.route('/safari-pinned-tab.svg')
+def safari():
+    return send_file("templates/safari-pinned-tab.svg")
+
+@app.route('/site.webmanifest')
+def site_webmanifest():
+    return send_file("templates/site.webmanifest")
+
 @app.route('/<path:path>')
 def redirect(path):
     return render_template("index.html")
