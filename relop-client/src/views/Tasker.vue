@@ -55,7 +55,7 @@ export default {
        })
      }
    },
-   methods: {
+    methods: {
     holdertext() {
       if( this.task != '') {
         if( this.computedList.length < 1 && this.tasks.length > 0 )
@@ -293,6 +293,11 @@ export default {
     font-size: 1.1em;
     padding: 40px 0px;
     color: rgb(56, 56, 56);
+  }
+
+  form {
+    position: sticky;
+    top: 0;
   }
 
   .taskinput {
