@@ -2,7 +2,10 @@
   <div class="hello page">
     <div v-if="isloading" class="loading">
       <div class="logo">
-        loading...
+        loading
+      </div>
+      <div class="loadingbar">
+        <bounce-loader class="loader-circle" :loading="isloading" :size="8" sizeUnit="em" color="#fff" ></bounce-loader>
       </div>
     </div>
     <div class="holder">
@@ -172,29 +175,31 @@ export default {
     padding: 0;
     transition: all 1s;
   }
-
-  .loading {
+   .loading {
     height: 100%;
-    width: 95%;
+    width: 96%;
     position: absolute;
     z-index: 3;
+    background: rgb(48, 48, 48);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     left: 50%;
     transform: translateX(-50%);
-    background: rgb(33, 58, 58);
   }
 
   .loading .logo {
     color: white;
-    position: relative;
     font-size: 3em;
-    z-index: 2;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: 0 auto;
     font-family: 'Righteous';
     text-align: center;
+    padding-bottom: 2em;
   }
 
+  .loading-circle {
+    margin: 0 auto;
+  }
   .holder {
     background: rgb(255, 255, 255);
     width: 95%;
@@ -324,6 +329,9 @@ export default {
 
   @media screen and (max-width: 600px) {
     .holder {
+      width: 100%;
+    }
+    .loading {
       width: 100%;
     }
     ul {

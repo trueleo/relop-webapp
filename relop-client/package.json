@@ -10,6 +10,7 @@
   "dependencies": {
     "@codekraft-studio/vue-animated": "^0.1.5",
     "@intervolga/optimize-cssnano-plugin": "^1.0.6",
+    "@saeris/vue-spinners": "^1.0.8",
     "axios": "^0.19.0",
     "blueimp-md5": "^2.12.0",
     "core-js": "^2.6.5",

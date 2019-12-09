@@ -2,7 +2,10 @@
     <div class="main-body page">
         <div v-if="isloading" class="loading">
           <div class="logo">
-            loading...
+            loading
+          </div>
+          <div class="loadingbar">
+            <bounce-loader class="loader-circle" :loading="isloading" :size="8" sizeUnit="em" color="#fff" ></bounce-loader>
           </div>
         </div>
         <input type="text" autocomplete="off" v-model="searchtext" @input="filter()" placeholder="Search..." >
@@ -116,6 +119,7 @@ export default {
     created() {
         this.getCompleted();
     },
+
 }
 </script>
 
@@ -132,23 +136,29 @@ export default {
 }
 
   .loading {
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 98%;
     position: absolute;
     z-index: 3;
     background: rgb(48, 48, 48);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .loading .logo {
-    height: 5em;
-    width: 5em;
     color: white;
-    position: absolute;
-    font-size: 2em;
-    z-index: 2;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    font-size: 3em;
+    margin: 0 auto;
+    font-family: 'Righteous';
+    text-align: center;
+    padding-bottom: 2em;
+  }
+
+  .loading-circle {
+    margin: 0 auto;
   }
 
 input {
@@ -259,6 +269,9 @@ input {
 }
 
 @media screen and (max-width: 600px){
+    .loading {
+      width: 100%;
+    }
 
     input {
         padding: 10px 20px;

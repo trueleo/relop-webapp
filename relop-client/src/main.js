@@ -2,9 +2,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import VueParticles from 'vue-particles'
+import { VueSpinners } from '@saeris/vue-spinners'
+
 Vue.use(VueParticles)
-// import cors from 'cors'
-// import VeeValidate from 'vee-validate';
+Vue.use(VueSpinners)
 
 Vue.config.productionTip = false
 
