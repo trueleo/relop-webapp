@@ -58,7 +58,7 @@ export default {
                 });
                 this.table = data;
                 this.table.sort(function (a,b) {
-                  return a.timestamp < b.timestamp
+                  return b.timestamp - a.timestamp
                 })
                 this.filtertable = this.table;
                 this.isloading = false;
@@ -274,7 +274,6 @@ input {
       width: 100%;
     }
     input {
-        padding: 10px 20px;
         border-radius: unset;
     }
     .container {
