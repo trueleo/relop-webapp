@@ -10,7 +10,7 @@
   </p>
 </nav>
 <!-- </transition> -->
-<transition name="naav-anim" enter-active-class="animated slideInRight" leave-active-class="animated fadeOutDown" >
+<transition name="naav-anim" enter-active-class="animated slideInRight fast" leave-active-class="animated fadeOutDown fast" >
   <router-view @authenticated="setAuthenticated" @signoff="logout"> </router-view>
 </transition>
 </div>
