@@ -66,7 +66,7 @@ body {
 
 
 .rootbody {
-  /* overflow: hidden; */
+  overflow: hidden;
   margin: 0;
   padding: 0;
   background-color: #11a9e6;
@@ -83,7 +83,7 @@ body, html {
 
 nav {
   background-color: rgb(75, 107, 212);
-  margin: 0 auto 20px auto;
+  margin: 0 auto;
   padding: 0.8em 1.2em;
   transition: all 0.5s;
 }

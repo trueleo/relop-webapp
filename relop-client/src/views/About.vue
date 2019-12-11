@@ -133,6 +133,7 @@ export default {
     min-width: 30em;
     max-width: 50em;
     margin: 1em auto;
+    margin-top: 2em;
     display: flex;
     flex-direction: column;
     justify-content: center;

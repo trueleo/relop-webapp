@@ -13,7 +13,7 @@
           <input class="taskinput" type="text" autocomplete="off" placeholder="Create a new task or Search for existing one" v-model="task" name="task">
         </form>
            <transition-group name="list-complete" tag="ul">
-            <div class="li-container" v-for="(data, index) in computedList" :key="data.task" v-bind:data-index="index">
+            <div class="li-container" v-for="(data, index) in computedList" :key="data.task_id" v-bind:data-index="index">
               <div class="list-item" v-if="editing != data.task_id">
               <li v-if="data.task.includes('del.dog')"><span v-html="data.task"></span></li>
               <li v-else>{{data.task}}</li>
@@ -85,7 +85,6 @@ export default {
             if( this.task.length < 180) {
               axios.post(baseurl + this.userid, {completed: false, task: this.task}).then( response => {
                 var data = response.data;
-              this.task = '';
               this.tasks.unshift(data);
               })
             }
@@ -95,12 +94,12 @@ export default {
                 var link = response.data;
                 axios.post(baseurl + this.userid, {completed: false, task: this.task.substring(0,30) + ' ... more at https://del.dog/' + link.key }).then( response => {
                   var data = response.data;
-                  this.tasks.unshift(data);
-                  this.task = '';
                   this.isloading = false;
+                  this.tasks.unshift(data);
                 });
               });
             }
+            this.task = '';
           }
     },
     completeTask(taskid) {
@@ -180,6 +179,7 @@ export default {
 
   .hello {
     margin: 0;
+    margin-top: 20px;
     padding: 0;
     transition: all 1s;
   }
@@ -212,14 +212,17 @@ export default {
     background: rgb(255, 255, 255);
     width: 95%;
     margin: 0 auto;
-    min-height: 95%;
-    overflow-x: hidden;
+    height: 95%;
+    overflow: hidden;
+    position: relative;
   }
 
   ul {
-    margin: 20px 30px;
+    margin: 0;
     padding: 0;
     list-style-type: none;
+    overflow-y: scroll;
+    height: calc( 100% - 70px);
   }
 
   .li-container {
@@ -228,7 +231,17 @@ export default {
     padding-right: 5px;
     border-radius: 40px;
     margin-bottom: 5px;
+    margin-right: 30px;
+    margin-left: 30px;
     background-color:#233C3C;
+  }
+
+  .li-container:first-child {
+    margin-top: 30px;
+  }
+
+  .li-container:last-child {
+    margin-bottom: 40px;
   }
 
   .list-item {
@@ -303,9 +316,15 @@ export default {
 
  .holder p {
     text-align:center;
-    font-size: 1.1em;
-    padding: 40px 0px;
-    color: rgb(56, 56, 56);
+    font-size: 1.0em;
+    padding: 10px 0px;
+    color: rgb(255, 255, 255);
+    background-color: #4b6bd4;
+    position: fixed;
+    width: calc( 95% );
+    bottom: 0;
+    margin-bottom: 0;
+    z-index: 4;
   }
 
   form {
@@ -324,7 +343,7 @@ export default {
 
   .list-complete-leave, .list-complete-leave-active {
     position: absolute;
-    width: calc(95% - 95px);
+    width: calc(100% - 105px);
     transition: all 300ms
   }
   .list-complete-enter-active {
@@ -335,6 +354,7 @@ export default {
     transform: translateY(-20px);
   }
   .list-complete-move {
+    z-index: 0;
     transition: all 600ms;
   }
 
@@ -342,11 +362,15 @@ export default {
     .holder {
       width: 100%;
     }
+    .holder p {
+      width: 100%;
+    }
     .loading {
       width: 100%;
     }
     ul {
-     margin: 15px 5px;
+     margin: 0;
+     margin-bottom: 40px;
     }
     i {
       font-size: 1.7em;
@@ -354,11 +378,20 @@ export default {
     }
     .li-container {
       padding-left: 10px;
+      margin: 2px;
       margin-bottom: 3px;
       border-radius: unset;
     }
+    .li-container:first-child {
+      margin-top: 15px;
+    }
+
+    .li-container:last-child {
+      margin-bottom: 20px;
+    }
+
     .list-complete-leave, .list-complete-leave-active {
-      width: calc(100% - 25px);
+      width: calc(100% - 30px);
     }
   }
 </style>

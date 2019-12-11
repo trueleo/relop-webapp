@@ -129,6 +129,7 @@ export default {
 .main-body {
     width: 100%;
     margin: 0em auto;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
