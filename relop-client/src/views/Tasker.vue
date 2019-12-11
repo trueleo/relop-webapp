@@ -341,9 +341,12 @@ export default {
     color: rgb(213, 214, 214);
   }
 
-  .list-complete-leave, .list-complete-leave-active {
+  .list-complete-leave {
     position: absolute;
-    width: calc(100% - 105px);
+  }
+  .list-complete-leave-active {
+    position: absolute;
+    width: calc(100% - 103px);
     transition: all 300ms
   }
   .list-complete-enter-active {
@@ -391,7 +394,7 @@ export default {
     }
 
     .list-complete-leave, .list-complete-leave-active {
-      width: calc(100% - 30px);
+      width: calc(100% - 10px);
     }
   }
 </style>
