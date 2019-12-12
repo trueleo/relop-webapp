@@ -15,7 +15,7 @@
            <transition-group name="list-complete" tag="ul">
             <div class="li-container" v-for="(data, index) in computedList" :key="data.task_id" v-bind:data-index="index">
               <div class="list-item" v-if="editing != data.task_id">
-              <li v-if="data.task.includes('del.dog')"><span v-html="data.task"></span></li>
+              <li v-if="data.task.includes('del.dog')"><span v-html="linkify(data.task)"></span></li>
               <li v-else>{{data.task}}</li>
               <i class="fa fa-edit" v-on:click="editing = data.task_id; edittext = data.task"></i>
               <i class="fa fa-check" v-on:click="completeTask(data.task_id)"></i>
@@ -59,6 +59,11 @@ export default {
      }
    },
     methods: {
+    linkify(text) {
+     // sanitize input 
+	var n = text.indexOf('del.dog')
+	return text.slice(0,n) + '<a href=' + text.slice(n) + 'target="_blank">'
+    },
     holdertext() {
       if( this.task != '') {
         if( this.computedList.length < 1 && this.tasks.length > 0 )
@@ -82,6 +87,7 @@ export default {
     },
     addTask() {
           if(this.task != '') {
+		var task_string = this.task
             if( this.task.length < 180) {
               axios.post(baseurl + this.userid, {completed: false, task: this.task}).then( response => {
                 var data = response.data;
@@ -92,7 +98,7 @@ export default {
               this.isloading = true;
               axios.post('https://del.dog/documents/', this.task).then( response => {
                 var link = response.data;
-                axios.post(baseurl + this.userid, {completed: false, task: this.task.substring(0,30) + ' ... more at https://del.dog/' + link.key }).then( response => {
+                axios.post(baseurl + this.userid, {completed: false, task: task_string.substring(0,30) + ' ... more at https://del.dog/' + link.key }).then( response => {
                   var data = response.data;
                   this.isloading = false;
                   this.tasks.unshift(data);
