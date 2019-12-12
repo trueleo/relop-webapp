@@ -120,6 +120,7 @@ export default {
     height: 100%;
     margin: 0 auto;
     transition: all 1s;
+    background-color: #0c4359;
     /* display: flex;
     flex-direction: column;
     justify-content: space-evenly; */
@@ -183,6 +184,7 @@ export default {
   .avatar img {
     border-radius: 50%;
     width: 100%;
+    background-color: black;
   }
 
 

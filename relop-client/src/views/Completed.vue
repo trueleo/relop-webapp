@@ -129,7 +129,6 @@ export default {
 .main-body {
     width: 100%;
     margin: 0em auto;
-    margin-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -165,21 +164,22 @@ export default {
 
 input {
     margin: 0 auto;
-    width: 90%;
+    margin-top: 30px;
+    width: calc( 95% - 60px );
     border: 0;
     padding: 20px 30px;
     font-size: 1.1em;
     border-bottom: 1px solid #00000014;
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
+    background-color: #05aaaa;
+    color: #fff;
     position: sticky;
     z-index: 2;
-    border-radius: 7px;
+    /* border-radius: 7px; */
     top: 0;
 }
 
 .container {
-  width: 90%;
+  width: 95%;
   margin: 0px auto;
   background: #ffffff;
   height: calc(100% - 6em);
@@ -236,9 +236,9 @@ input {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  border: 2px solid rgb(39, 39, 39);
+  border: 2px solid #1a1a1a;
   position: absolute;
-  background: #d9ff00;
+  background-color: #05aaaa;
   left: -5px;
   top: 0;
 }
@@ -275,11 +275,12 @@ input {
       width: 100%;
     }
     input {
-        border-radius: unset;
+      margin-top: 5px;
+      width: calc( 100% - 60px)
     }
     .container {
         font-size: 0.9em;
-        width: 95%;
+        width: 100%;
     }
     .container p {
         font-size: 1.2em;

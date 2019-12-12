@@ -5,7 +5,7 @@
       <div class="login-container" v-if="tab == 1" key="loginpage">
         <transition name="error-anim" enter-active-class="animated slideInDown" leave-active-class="animated slideOutRight" mode="out-in">
         <h2 v-if="haserror" v-bind:style="{ backgroundColor: '#ff0d2d' }" key="activelogin"> Login Failed </h2>
-        <h2 v-else v-bind:style="{ backgroundColor: '#08240073' }" key="errorlogin"> Login </h2>
+        <h2 v-else v-bind:style="{ backgroundColor: '#00574f' }" key="errorlogin"> Login </h2>
         </transition>
         <div class="login-feild">
         <input class="inputtext" v-model="login.username" v-on:keyup.enter="focusInput('passinput')" ref="userinput" type="text" placeholder="username" >
@@ -18,7 +18,7 @@
       <div class="create-container" v-if="tab == 2" key="createpage">
         <transition name="error-anim" enter-active-class="animated slideInDown" leave-active-class="animated slideOutRight" mode="out-in">
         <h2 v-if="hascreateerror" v-bind:style="{ backgroundColor: '#ff0d2d' }" key="activelogin"> {{ errormsg }} </h2>
-        <h2 v-else v-bind:style="{ backgroundColor: '#08240073' }" key="errorlogin"> Register </h2>
+        <h2 v-else v-bind:style="{ backgroundColor: '#00574f' }" key="errorlogin"> Register </h2>
         </transition>
         <div class="login-feild">
         <input class="inputtext" v-model="newaccount.fullname" v-on:keyup.enter="focusInput('c_userinput')" ref="c_fullname" type="text" placeholder="full name">
@@ -147,15 +147,16 @@ export default {
   .create-button {
     margin-top: 2em;
     padding: 10px 20px;
-    background-color: #08240077;
+    background-color: rgba(0, 48, 40, 0.582);
     color: white;
     border-radius: 30px;
     width: 11em;
     text-align: center;
+    cursor: pointer;
   }
 
   .container {
-    background: #004646;
+    background: #fff;
     -webkit-box-shadow: 1px 4px 11px -3px rgba(0,0,0,0.53);
     -moz-box-shadow: 1px 4px 11px -3px rgba(0,0,0,0.53);
     box-shadow: 1px 4px 12px -3px rgba(0,0,0,0.53);
@@ -172,7 +173,7 @@ export default {
   }
 
   .login-container h2 {
-    font-family: 'Righteous';
+    font-family: 'Righteous', Arial, Helvetica, sans-serif;
     font-size: 3em;
     font-weight: 400;
     color: white;
@@ -209,20 +210,25 @@ export default {
     margin-top: 0;
     background-color: #08240073;
   }
+
+ .create-container h2, .login-container h2 {
+    cursor: default;
+ }
+
   .create-container .submitbutton {
     align-self: center;
   }
   .inputtext {
     /* background-color: rgba(0,53,40,0.53); */
     /* color: white; */
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     color: black;
     border-width: 1px;
     border-width: 1px;
     border-top: unset;
     border-right: unset;
     border-left: unset;
-    border-bottom-color: white;
+    border-bottom-color: rgb(24, 24, 24);
     height: 57%;
     width: 76%;
     /* vertical-align: center; */
@@ -230,7 +236,7 @@ export default {
   }
 
   .submitbutton {
-    background: linear-gradient(135deg, #FC466B 0%, #3F5EFB 100%);
+    background: linear-gradient(135deg, #1facd2 0%, #00ebd6 100%);
     color: white;
     border: unset;
     border-radius: 30px;
@@ -238,7 +244,7 @@ export default {
     margin-top: 2em;
     margin-bottom: 2em;
     font-size: 1em;
-    font-weight: 400;
+    font-weight: 600;
     align-self: center;
   }
 

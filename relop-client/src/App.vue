@@ -69,7 +69,7 @@ body {
   overflow: hidden;
   margin: 0;
   padding: 0;
-  background-color: #11a9e6;
+  background-color: #0c4359;
   background-size: auto;
   /* width: 100%; */
   height: 100%;

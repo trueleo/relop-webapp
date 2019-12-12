@@ -179,7 +179,6 @@ export default {
 
   .hello {
     margin: 0;
-    margin-top: 20px;
     padding: 0;
     transition: all 1s;
   }
@@ -212,9 +211,10 @@ export default {
     background: rgb(255, 255, 255);
     width: 95%;
     margin: 0 auto;
-    height: 95%;
+    height: calc( 100% - 4em );
     overflow: hidden;
     position: relative;
+    margin-top: 30px;
   }
 
   ul {
@@ -222,7 +222,7 @@ export default {
     padding: 0;
     list-style-type: none;
     overflow-y: scroll;
-    height: calc( 100% - 70px);
+    height: calc( 100% - 4em);
   }
 
   .li-container {
@@ -233,7 +233,7 @@ export default {
     margin-bottom: 5px;
     margin-right: 30px;
     margin-left: 30px;
-    background-color:#233C3C;
+    background-color:rgb(236, 236, 236);
   }
 
   .li-container:first-child {
@@ -252,16 +252,12 @@ export default {
 
   .list-item li {
     overflow: hidden;
-    color: white;
+    color: #213A3A;
     margin-top: auto;
     margin-bottom: auto;
     margin-right: auto;
   }
 
-  li a {
-    color: white;
-    text-decoration: none;
-  }
 
   i {
   align-self: flex-end;
@@ -273,13 +269,19 @@ export default {
   color: white;
   }
 
+  .fa-check, .fa-times {
+    border: 3px solid #213A3A;
+  }
 
   .fa-check {
-    background-color: #00ff6a;
+    background-color: #1facd2;
   }
   .fa-times {
     padding: 0.4em 0.53em;
-    background-color: rgb(255, 50, 70);
+    background-color: #ff3f63;
+  }
+  .fa-edit{
+    color: #213A3A;
   }
 
   ul li {
@@ -295,11 +297,14 @@ export default {
   }
 
   .editingdiv div {
-    background-color: rgb(245, 245, 245);
+    background-color: #22e489;
+    border: 3px solid#589b82;
     border-radius: 40px;
-    color: rgb(70, 70, 70);
+    color: rgb(238, 238, 238);
+    margin-right: 8px;
     padding: 0.36em 0.7em;
-    font-weight: 500;
+    font-weight: 600;
+    cursor: pointer;
   }
 
   .editingdiv input[type=text] {
@@ -309,8 +314,8 @@ export default {
     margin-right: 0.7em;
     font-size: 0.9em;
     width: calc(100% - 6.8em);
-    background-color: #233C3C;
-    color: #fff;
+    background-color: #ececec;
+    color: #2e2e2e;
     font-weight: 300;
   }
 
@@ -319,10 +324,10 @@ export default {
     font-size: 1.0em;
     padding: 10px 0px;
     color: rgb(255, 255, 255);
-    background-color: #4b6bd4;
+    background-color: #05aaaa;
     position: fixed;
-    width: calc( 95% );
-    bottom: 0;
+    width: 95%;
+    bottom: calc(4em - 1em - 20px);
     margin-bottom: 0;
     z-index: 4;
   }
@@ -337,8 +342,8 @@ export default {
     border: 0;
     padding: 20px 30px;
     font-size: 1.3em;
-    background-color: #213A3A;
-    color: rgb(213, 214, 214);
+    background-color: #05aaaa;
+    color: #fff;
   }
 
   .list-complete-leave {
@@ -364,9 +369,12 @@ export default {
   @media screen and (max-width: 600px) {
     .holder {
       width: 100%;
+      margin-top: 5px;
+      height: calc( 100% - 2em )
     }
     .holder p {
       width: 100%;
+      bottom: calc(1.6em - 20px)
     }
     .loading {
       width: 100%;
