@@ -33,7 +33,7 @@
 </template>
 
 <script>
-const baseurl = '/api/tasker/'
+const baseurl = 'http://localhost:5000/api/tasker/'
 
 import axios from 'axios';
 
@@ -60,9 +60,8 @@ export default {
    },
     methods: {
     linkify(text) {
-     // sanitize input 
-	var n = text.indexOf('del.dog')
-	return text.slice(0,n) + '<a href=' + text.slice(n) + 'target="_blank">'
+      var n = text.indexOf('https://del.dog/');
+      return text.slice(0,n) + '<br><a style="text-decoration: none; color: #5eabed; " href="' + text.slice(n, n+26) + '" target="_blank">' +text.slice(n, n + 26) + '</a>'
     },
     holdertext() {
       if( this.task != '') {
@@ -98,7 +97,7 @@ export default {
               this.isloading = true;
               axios.post('https://del.dog/documents/', this.task).then( response => {
                 var link = response.data;
-                axios.post(baseurl + this.userid, {completed: false, task: task_string.substring(0,30) + ' ... more at https://del.dog/' + link.key }).then( response => {
+                axios.post(baseurl + this.userid, {completed: false, task: task_string.substring(0,60) + ' ... https://del.dog/' + link.key }).then( response => {
                   var data = response.data;
                   this.isloading = false;
                   this.tasks.unshift(data);
