@@ -2,12 +2,10 @@
 <div class="rootbody">
 <!-- <transition name="nav-anim" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft" mode="out-in"> -->
 <nav v-if="authenticated">
-  <p>
     <router-link to="/todo" replace> todo </router-link>
     <router-link to="/completed">completed</router-link>
     <router-link to="/about"> about </router-link>
     <router-link to="/login" v-on:click.native="logout()" replace>logout</router-link>
-  </p>
 </nav>
 <!-- </transition> -->
 <transition name="naav-anim" enter-active-class="animated slideInRight fast" leave-active-class="animated fadeOutDown fast" >
@@ -86,13 +84,10 @@ nav {
   margin: 0 auto;
   padding: 0.8em 1.2em;
   transition: all 0.5s;
+  display: flex;
 }
 
-nav p {
-  background-color: rgb(136, 250, 184);
-}
-
-nav p * {
+nav * {
   padding: 0.4em 0.6em;
   margin-right: 15px;
   text-decoration: none;
@@ -104,14 +99,12 @@ nav p * {
 }
 
 nav *:nth-child(4) {
-  position: absolute;
+  margin-left: auto;
   margin-right: 0;
-  transform: translateY(-0.35em);
-  right: 0.6em;
 }
 
 .page {
-  height: calc( 100% - 6.5em );
+  height: calc( 100% - 2*0.8em - 2*1.4*0.4em - 1.4em );
   position: fixed;
   width: 100%;
   overflow: auto;

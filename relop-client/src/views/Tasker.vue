@@ -13,18 +13,21 @@
           <input class="taskinput" type="text" autocomplete="off" placeholder="Create a new task or Search for existing one" v-model="task" name="task">
         </form>
            <transition-group name="list-complete" tag="ul">
-            <div class="li-container" v-for="(data, index) in computedList" :key="data.task_id" v-bind:data-index="index">
-              <div class="list-item" v-if="editing != data.task_id">
-              <li v-if="data.task.includes('del.dog')"><span v-html="linkify(data.task)"></span></li>
+            <div class="li-container" v-for="(data, index) in computedList" :key="data.task_id" v-bind:data-index="index" v-bind:class="deleting.includes(data.task_id) ? 'undodiv' : ''">
+              <div class="list-item" v-if="!deleting.includes(data.task_id) && editing != data.task_id">
+                <li v-if="data.task.includes('https://del.dog/')"><span v-html="linkify(data.task)"></span></li>
               <li v-else>{{data.task}}</li>
-              <i class="fa fa-edit" v-on:click="editing = data.task_id; edittext = data.task"></i>
+                <i v-if="!data.task.includes('https://del.dog/')" class="fa fa-edit" v-on:click="editing = data.task_id; edittext = data.task"></i>
               <i class="fa fa-check" v-on:click="completeTask(data.task_id)"></i>
-              <i class="fa fa-times" v-on:click="remove(data.task_id)"></i>
+                <i class="fa fa-times" v-on:click="removeTimed(data.task_id)"></i>
               </div>
               <div v-if="editing == data.task_id" class="editingdiv">
                 <input type="text" placeholder="Enter a task.." v-model="edittext" v-on:keyup.enter="editTask(data.task_id)" name="edit">
                 <div @click="editTask(data.task_id)"> save </div>
               </div>
+              <div v-if="deleting.includes(data.task_id)" class="removediv">
+                <div @click="cancelRemove(data.task_id)"> undo </div>
+            </div>
             </div>
            </transition-group>
         <p> {{holdertext()}} </p>
@@ -44,6 +47,7 @@ export default {
       userid: this.$parent.userhash,
       task: '',
       editing: -1,
+      deleting: [],
       edittext: '',
       tasks: [],
       isloading: false,
@@ -61,7 +65,7 @@ export default {
     methods: {
     linkify(text) {
       var n = text.indexOf('https://del.dog/');
-      return text.slice(0,n) + '<br><a style="text-decoration: none; color: #5eabed; " href="' + text.slice(n, n+26) + '" target="_blank">' +text.slice(n, n + 26) + '</a>'
+      return text.slice(0,60) + '...<br><a style="text-decoration: none; color: #5eabed; " href="' + text.slice(n, n+26) + '" target="_blank">' + 'more ' + '</a>'
     },
     holdertext() {
       if( this.task != '') {
@@ -95,9 +99,9 @@ export default {
             }
             else {
               this.isloading = true;
-              axios.post('https://del.dog/documents/', this.task).then( response => {
+              axios.post('https://del.dog/documents/', task_string).then( response => {
                 var link = response.data;
-                axios.post(baseurl + this.userid, {completed: false, task: task_string.substring(0,60) + ' ... https://del.dog/' + link.key }).then( response => {
+                axios.post(baseurl + this.userid, {completed: false, task: task_string + ' ... https://del.dog/' + link.key }).then( response => {
                   var data = response.data;
                   this.isloading = false;
                   this.tasks.unshift(data);
@@ -152,19 +156,33 @@ export default {
       }
     },
 
-     remove(taskid) {
+    removeTimed(taskid) {
+      this.deleting.push(taskid)
+      setTimeout(this._delete, 3000, taskid)
+    },
+
+    cancelRemove(taskid) {
+      const index = this.deleting.indexOf(taskid)
+      if (index > -1) {
+        this.deleting.splice(index, 1);
+      }
+    },
+
+    _delete(taskid) {
+      if(this.deleting.includes(taskid)) {
        var index = this.tasks.findIndex( function (item) {
           return item.task_id == taskid
        });
        const task_id = this.tasks[index].task_id;
+        this.cancelRemove(taskid)
        axios.delete( baseurl + this.userid + '/' + task_id  );
        this.tasks.splice(index, 1);
       }
+    }
     },
 
     created() {
       this.getAll();
-      this.filtertable = this.tasks
     },
 
     watch: {
@@ -187,6 +205,7 @@ export default {
     padding: 0;
     transition: all 1s;
   }
+
    .loading {
     height: 100%;
     width: 96%;
@@ -212,6 +231,7 @@ export default {
   .loading-circle {
     margin: 0 auto;
   }
+
   .holder {
     background: rgb(255, 255, 255);
     width: 95%;
@@ -220,14 +240,45 @@ export default {
     overflow: hidden;
     position: relative;
     margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+  }
+
+ .holder p {
+    margin: 0;
+    text-align:center;
+    font-size: 1.0em;
+    padding: 10px 0px;
+    color: rgb(255, 255, 255);
+    background-color: #05aaaa;
+  }
+
+  form {
+    position: sticky;
+    top: 0;
+  }
+
+  .taskinput {
+    width: calc(100% - 60px);
+    border: 0;
+    padding: 20px 30px;
+    font-size: 1.3em;
+    background-color: #05aaaa;
+    color: #fff;
   }
 
   ul {
     margin: 0;
     padding: 0;
+      padding-top: 30px;
     list-style-type: none;
     overflow-y: scroll;
     height: calc( 100% - 4em);
+  }
+
+  ul li {
+    font-size: 1.4em;
   }
 
   .li-container {
@@ -239,10 +290,6 @@ export default {
     margin-right: 30px;
     margin-left: 30px;
     background-color:rgb(236, 236, 236);
-  }
-
-  .li-container:first-child {
-    margin-top: 30px;
   }
 
   .li-container:last-child {
@@ -289,10 +336,6 @@ export default {
     color: #213A3A;
   }
 
-  ul li {
-    font-size: 1.4em;
-  }
-
   .editingdiv {
     display: flex;
     justify-content: flex-start;
@@ -324,31 +367,21 @@ export default {
     font-weight: 300;
   }
 
- .holder p {
-    text-align:center;
-    font-size: 1.0em;
-    padding: 10px 0px;
-    color: rgb(255, 255, 255);
-    background-color: #05aaaa;
-    position: fixed;
-    width: 95%;
-    bottom: calc(4em - 1em - 20px);
-    margin-bottom: 0;
-    z-index: 4;
+  .removediv {
+    padding: 5px;
+    display: flex;
+    justify-content: flex-end;
+    align-content: flex-end;
   }
 
-  form {
-    position: sticky;
-    top: 0;
-  }
-
-  .taskinput {
-    width: calc(100% - 60px);
-    border: 0;
-    padding: 20px 30px;
-    font-size: 1.3em;
-    background-color: #05aaaa;
-    color: #fff;
+  .removediv div {
+    padding: 10px 20px;
+    margin-right: 10px;
+    font-size: 1.2em;
+    background-color: #213A3A;
+    color: honeydew;
+    border: 3px solid brown;
+    border-radius: 40px;
   }
 
   .list-complete-leave {
@@ -371,35 +404,46 @@ export default {
     transition: all 600ms;
   }
 
+  .undodiv {
+    animation: undonow 1s infinite alternate;
+    animation-play-state: running;
+  }
+
+  @keyframes undonow {
+      0% {
+        background-color: #ff3f63;
+      }
+      100% {
+        background-color: #ececec;
+      }
+  }
+
   @media screen and (max-width: 600px) {
     .holder {
       width: 100%;
       margin-top: 5px;
-      height: calc( 100% - 2em )
+      height: calc( 100% - 1em )
     }
-    .holder p {
-      width: 100%;
-      bottom: calc(1.6em - 20px)
-    }
+
     .loading {
       width: 100%;
     }
+
     ul {
      margin: 0;
-     margin-bottom: 40px;
+     padding-top: 10px;
     }
+
     i {
       font-size: 1.7em;
       margin: 0 3px;
     }
+
     .li-container {
       padding-left: 10px;
       margin: 2px;
       margin-bottom: 3px;
       border-radius: unset;
-    }
-    .li-container:first-child {
-      margin-top: 15px;
     }
 
     .li-container:last-child {

@@ -54,7 +54,7 @@ export default {
                 var data = response.data;
                 this.table = [];
                 data.forEach(element => {
-                  element.timestamp = new Date(element.timestamp)
+                  element.timestamp = new Date(element.timestamp + 'Z')
                 });
                 this.table = data;
                 this.table.sort(function (a,b) {
@@ -182,7 +182,7 @@ input {
   width: 95%;
   margin: 0px auto;
   background: #ffffff;
-  height: calc(100% - 6em);
+  height: calc(100% - 8em);
   overflow-y: scroll;
 }
 
