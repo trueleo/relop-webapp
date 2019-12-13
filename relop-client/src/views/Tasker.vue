@@ -267,7 +267,9 @@ export default {
     background-color: #05aaaa;
     color: #fff;
   }
-
+	.taskinput::placeholder {
+		color: #fafafa;
+	}
   ul {
     margin: 0;
     padding: 0;

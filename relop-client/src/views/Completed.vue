@@ -178,6 +178,10 @@ input {
     top: 0;
 }
 
+	input::placeholder {
+		color: #fafafa;
+	}
+
 .container {
   width: 95%;
   margin: 0px auto;
