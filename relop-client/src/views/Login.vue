@@ -246,6 +246,7 @@ export default {
     font-size: 1em;
     font-weight: 600;
     align-self: center;
+    cursor: pointer;
   }
 
   .container {

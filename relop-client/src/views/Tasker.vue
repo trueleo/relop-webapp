@@ -65,7 +65,7 @@ export default {
     methods: {
     linkify(text) {
       var n = text.indexOf('https://del.dog/');
-      return text.slice(0,60) + '...<br><a style="text-decoration: none; color: #5eabed; " href="' + text.slice(n, n+26) + '" target="_blank">' + 'more ' + '</a>'
+      return text.slice(0,60) + '...<a style="text-decoration: none; color: #5eabed; " href="' + text.slice(n, n+26) + '" target="_blank">' + 'more ' + '</a>'
     },
     holdertext() {
       if( this.task != '') {
@@ -158,7 +158,7 @@ export default {
 
     removeTimed(taskid) {
       this.deleting.push(taskid)
-      setTimeout(this._delete, 3000, taskid)
+      setTimeout(this._delete, 5000, taskid)
     },
 
     cancelRemove(taskid) {
@@ -382,6 +382,7 @@ export default {
     color: honeydew;
     border: 3px solid brown;
     border-radius: 40px;
+    cursor: pointer;
   }
 
   .list-complete-leave {
@@ -405,7 +406,7 @@ export default {
   }
 
   .undodiv {
-    animation: undonow 1s infinite alternate;
+    animation: undonow 800ms infinite alternate;
     animation-play-state: running;
   }
 
