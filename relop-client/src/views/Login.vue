@@ -269,6 +269,7 @@ export default {
   .submitbutton:hover {
     background-position: right;
   }
+
   .submitbutton:focus {
     box-shadow: 0 0 0 3px rgb(255, 255, 255),
                 0 0 0 8px #068cb4;
@@ -282,5 +283,11 @@ export default {
   }
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
+  }
+
+  .submitbutton:focus, .inputtext:focus, .create-button:focus {
+    -webkit-tap-highlight-color: rgba(255,255,255,0) !important;
+    -webkit-focus-ring-color: rgba(255,255,255,0) !important;
+    outline: none;
   }
 </style>

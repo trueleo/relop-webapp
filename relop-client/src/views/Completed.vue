@@ -303,5 +303,13 @@ input {
         left: -6em;
         font-size: 0.8em
     }
-}
+
+  }
+
+  input:focus {
+    -webkit-tap-highlight-color: rgba(255,255,255,0) !important;
+    -webkit-focus-ring-color: rgba(255,255,255,0) !important;
+    outline: none;
+  }
+
 </style>
