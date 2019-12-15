@@ -45,7 +45,7 @@
       </div>
       <div class="right">
         <div class="title">RELOP</div>
-        <div class="version">Version: 0.1.5</div>
+        <div class="version">Version: 0.4.0</div>
         <div class="links">
           <a href="http://github.com/trueleo" target="_blank">
             <i class="fa fa-github"></i>
@@ -57,7 +57,7 @@
             <i class="fa fa-telegram"></i>
           </a>
         </div>
-        <div class="author">Author:   &nbsp;  Satyam Singh ( trueleo )</div>
+        <!-- <div class="author">Satyam Singh</div> -->
       </div>
     </div>
   </div>
@@ -121,24 +121,31 @@ export default {
     margin: 0 auto;
     transition: all 1s;
     background-color: #0c4359;
-    /* display: flex;
+    display: flex;
     flex-direction: column;
-    justify-content: space-evenly; */
+    justify-content: center;
+    align-items: center;
   }
 
   .statscard {
-    background: white;
+    background: linear-gradient(45deg, rgb(64, 140, 190) 0%,
+                              rgb(64, 140, 190) 4%,rgb(62, 107, 145) 4%,
+                              rgb(62, 107, 145) 7%,rgb(49, 99, 131) 7%,
+                              rgb(49, 99, 131) 9%,rgb(116, 172, 211) 9%,
+                              rgb(116, 172, 211) 23%,rgb(125, 182, 214) 23%,
+                              rgb(125, 182, 214) 29%,rgb(40, 90, 136) 29%,
+                              rgb(40, 90, 136) 35%,rgb(39, 123, 190) 35%,
+                              rgb(39, 123, 190) 100%);
     position: relative;
     width: 80%;
     height: 27em;
     min-width: 30em;
     max-width: 50em;
-    margin: 1em auto;
-    margin-top: 2em;
     display: flex;
     flex-direction: column;
     justify-content: center;
     z-index: 2;
+    /* margin-top: -7em; */
   }
 
   .parjs {
@@ -159,16 +166,21 @@ export default {
     align-content: center;
 }
 
-  .right {
+  .statscard .right {
     padding-left: 2em;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    color:#0c4359;
   }
 
   .greettext {
     font-size: 2em;
     font-weight: 600;
+  }
+
+  .tasks, .taskdone {
+    font-size: 1.3em;
   }
 
   .quote {
@@ -179,29 +191,32 @@ export default {
 
   .avatar {
     width: 12em;
+    padding-top: 12em;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
   }
 
   .avatar img {
+    position: absolute;
+    top: 0;
     border-radius: 50%;
-    width: 100%;
-    background-color: black;
+    width: inherit;
+    height: inherit;
+    box-shadow: 0 0 1px 0px rgba(255, 255, 255, 0) inset, 0 0 1px 0px rgba(255, 255, 255, 0), 0 0 0 5px #285a88;
   }
 
 
   .card {
-    /* border-radius: 10px; */
     background: white;
     width: 80%;
     min-width: 30em;
     max-width: 50em;
     padding: 16px 0px;
     position: relative;
-    /* height: 20em; */
-    margin: 8em auto;
     z-index: 2;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: row-reverse;
+    justify-content: space-around;
     align-items: center;
   }
 
@@ -223,11 +238,12 @@ export default {
     letter-spacing: 10px;
     line-height: 1.4em;
     font-weight: 600;
+    color: #0c4359;
   }
 
   .version {
     padding: 5px 30px;
-    background-color: black;
+    background-color: #0c4359;
     color: white;
     text-align: end;
     font-size: 1em;
@@ -249,7 +265,7 @@ export default {
   }
 
   .links a{
-    color: black;
+    color: #0c4359;
   }
 
   .links i {
@@ -259,6 +275,19 @@ export default {
   }
 
   @media screen and (max-width: 600px){
+    .statscard {
+      background: linear-gradient(225deg,
+                              rgb(64, 140, 190) 0%,
+                              rgb(64, 140, 190) 4%,rgb(62, 107, 145) 4%,
+                              rgb(62, 107, 145) 7%,rgb(49, 99, 131) 7%,
+                              rgb(49, 99, 131) 9%,rgb(116, 172, 211) 9%,
+                              rgb(116, 172, 211) 23%,rgb(125, 182, 214) 23%,
+                              rgb(125, 182, 214) 29%,rgb(40, 90, 136) 29%,
+                              rgb(40, 90, 136) 35%,rgb(39, 123, 190) 35%,
+                              rgb(39, 123, 190) 100%
+                              );
+    }
+
     .statscard, .card {
       width: 85%;
     }
@@ -277,6 +306,16 @@ export default {
     .statscard .quote {
       margin-bottom: 10px;
     }
+  }
+
+  .links a:focus {
+  -webkit-tap-highlight-color: rgba(255,255,255,0) !important;
+  -webkit-focus-ring-color: rgba(255,255,255,0) !important;
+  outline: none;
+  }
+
+  .links a:focus i {
+    color: rgb(0, 233, 163);
   }
 
 </style>
