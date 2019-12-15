@@ -103,6 +103,15 @@ nav *:nth-child(4) {
   margin-right: 0;
 }
 
+nav *::-moz-focus-inner {
+  border: none;
+}
+
+nav *:focus {
+  outline: 2px dashed rgb(255, 255, 255);
+  outline-offset: 4px;
+}
+
 .page {
   height: calc( 100% - 2*0.8em - 2*1.4*0.4em - 1.4em );
   position: fixed;

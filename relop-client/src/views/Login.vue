@@ -33,9 +33,7 @@
       </div>
     </transition>
   </div>
-  <div class="create-button" @click="tab = ( tab == 1 ? 2 : 1 );  ">
-    {{ tab == 1 ? "Create New Account" : "Login To An Existing Account" }}
-  </div>
+  <input type="submit" class="create-button" v-bind:value="tab == 1 ? 'Create New Account' : 'Login To An Existing Account'" @click="tab = ( tab == 1 ? 2 : 1 );">
 </div>
 </template>
 
@@ -146,15 +144,21 @@ export default {
 
   .create-button {
     margin-top: 2em;
-    padding: 10px 20px;
+    padding: 8px 20px;
     background-color: rgba(0, 48, 40, 0.582);
     color: white;
     border-radius: 30px;
-    width: 11em;
+    width: fit-content;
     text-align: center;
     cursor: pointer;
+    border: none;
   }
-
+  .create-button::-moz-focus-inner {
+    border: none
+  }
+  .create-button:focus {
+    box-shadow: 0 0 0 5px rgb(255, 255, 255);
+  }
   .container {
     background: #fff;
     -webkit-box-shadow: 1px 4px 11px -3px rgba(0,0,0,0.53);
@@ -218,6 +222,7 @@ export default {
   .create-container .submitbutton {
     align-self: center;
   }
+
   .inputtext {
     /* background-color: rgba(0,53,40,0.53); */
     /* color: white; */
@@ -233,20 +238,40 @@ export default {
     width: 76%;
     /* vertical-align: center; */
     padding: 0.3em 1em;
+    transition: border-bottom-color .3s;
+  }
+  .inputtext:focus, .inputtext:hover {
+    border-bottom-color: #068cb4;
+  }
+  .inputtext:focus::placeholder {
+    color: #068cb4;
   }
 
   .submitbutton {
-    background: linear-gradient(135deg, #1facd2 0%, #00ebd6 100%);
+    background: linear-gradient(135deg, #50c8e9 0%, #35afe7 50%, #2298e6 100%);
+    background-size: 200%;
     color: white;
     border: unset;
-    border-radius: 30px;
-    padding: 1.2em 3.2em;
+    border-radius: 40px;
+    padding: 1em 3em;
     margin-top: 2em;
     margin-bottom: 2em;
     font-size: 1em;
     font-weight: 600;
     align-self: center;
     cursor: pointer;
+    transition: background-position .3s;
+  }
+
+  .submitbutton::-moz-focus-inner {
+    border: 0;
+  }
+  .submitbutton:hover {
+    background-position: right;
+  }
+  .submitbutton:focus {
+    box-shadow: 0 0 0 3px rgb(255, 255, 255),
+                0 0 0 8px #068cb4;
   }
 
   .container {
