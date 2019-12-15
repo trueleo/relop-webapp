@@ -126,6 +126,9 @@ nav *:focus {
 }
 
 @media screen and (max-width: 500px){
+  nav {
+    background-color: #fff0
+  }
   nav p * {
     margin-right: 8px;
     font-size: 1.3em;

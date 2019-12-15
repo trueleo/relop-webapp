@@ -1,6 +1,6 @@
 <template>
   <div class="about page">
-    <vue-particles class="parjs" color="#fff"
+    <vue-particles v-if="window_width > 600" class="parjs" color="#fff"
         :particleOpacity="1"
         :particlesNumber="30"
         shapeType="circle"
@@ -87,9 +87,10 @@ export default {
       taskongoing: 0,
       quotes: quotes, // THIS QUOTES = GLOBAL QUOTES
       quoteindex: 0,
+      window_width: document.documentElement.clientWidth
     }
    },
- methods: {
+  methods: {
       getData() {
           axios.get(baseurl + 'tasker/' + this.userid).then(response => {
             var data = response.data;
@@ -171,7 +172,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color:#0c4359;
+    color:#eeeeee;
   }
 
   .greettext {
@@ -275,7 +276,12 @@ export default {
   }
 
   @media screen and (max-width: 600px){
+
+    .about {
+      justify-content: flex-start;
+    }
     .statscard {
+      margin-top: 0;
       background: linear-gradient(225deg,
                               rgb(64, 140, 190) 0%,
                               rgb(64, 140, 190) 4%,rgb(62, 107, 145) 4%,
@@ -289,7 +295,10 @@ export default {
     }
 
     .statscard, .card {
-      width: 85%;
+      width: 100%;
+    }
+    .card {
+      height: calc(100% - 27em);
     }
 
     .statscard .outer, .card {

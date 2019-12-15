@@ -424,7 +424,7 @@ export default {
   @media screen and (max-width: 600px) {
     .holder {
       width: 100%;
-      margin-top: 5px;
+      margin-top: 0;
       height: calc( 100% - 1em )
     }
 

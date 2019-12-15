@@ -290,4 +290,12 @@ export default {
     -webkit-focus-ring-color: rgba(255,255,255,0) !important;
     outline: none;
   }
+
+  .inputtext:-webkit-autofill {
+    -webkit-box-shadow: none;
+    -webkit-text-fill-color: #fff0;
+  }
+  input {
+    filter: none !important
+  }
 </style>
