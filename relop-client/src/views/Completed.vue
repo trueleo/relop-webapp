@@ -168,7 +168,7 @@ input {
     width: calc( 95% - 60px );
     border: 0;
     padding: 20px 30px;
-    font-size: 1.1em;
+    font-size: 1.3em;
     border-bottom: 1px solid #00000014;
     background-color: #05aaaa;
     color: #fff;
@@ -200,7 +200,7 @@ input {
   position: relative;
   top: 0;
   padding: 10px 10px 5px 7em;
-  font-size: 1.4em;
+  /* font-size: 1.4em; */
 }
 
 .container ul:before {
@@ -209,7 +209,6 @@ input {
   height: 100%;
   position: absolute;
   border-left: 2px dashed rgb(46, 46, 46);
-
 }
 
 .container ul li {
@@ -252,6 +251,7 @@ input {
 
 .container ul li .info {
   margin-left: 0.8em;
+  font-size: 1.4em;
 }
 
 .container .number {
@@ -260,9 +260,9 @@ input {
 
 .container .number span {
   position: absolute;
-  font-size: 0.7em;
+  font-size: 1em;
   color:rgb(70, 70, 70);
-  left: -11em;
+  left: -7em;
   font-weight: bold;
 }
 
@@ -283,7 +283,7 @@ input {
       width: calc( 100% - 60px)
     }
     .container {
-        font-size: 0.9em;
+        /* font-size: 0.9em; */
         width: 100%;
 	height: calc(100% - 40px -1.1rem)
     }
@@ -291,18 +291,18 @@ input {
         font-size: 1.2em;
     }
     .container ul {
-        padding-left: 5em;
+        padding-left: 6em;
     }
     .container ul li {
-        margin-left: 1em;
-        width: calc(100% - 2.5em);
+        margin-left: 1.5em;
+        width: calc(100% - 3em);
     }
     .container ul li .circle {
-        left: -1em;
+        left: -1.5em;
     }
     .container ul .number span {
-        left: -6em;
-        font-size: 0.8em
+        left: -6.3em;
+        font-size: 1em
     }
 
   }
