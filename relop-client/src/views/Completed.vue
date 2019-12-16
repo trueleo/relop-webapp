@@ -285,6 +285,7 @@ input {
     .container {
         font-size: 0.9em;
         width: 100%;
+	height: calc(100% - 40px -1.1rem)
     }
     .container p {
         font-size: 1.2em;

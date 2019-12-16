@@ -292,8 +292,8 @@ export default {
   }
 
   .inputtext:-webkit-autofill {
-    -webkit-box-shadow: none;
-    -webkit-text-fill-color: #fff0;
+    -webkit-box-shadow: 0 0 100px white inset;
+    -webkit-text-fill-color: #222;
   }
   input {
     filter: none !important

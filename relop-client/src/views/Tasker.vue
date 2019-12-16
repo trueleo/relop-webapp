@@ -425,7 +425,7 @@ export default {
     .holder {
       width: 100%;
       margin-top: 0;
-      height: calc( 100% - 1em )
+      height: calc( 100% )
     }
 
     .loading {
