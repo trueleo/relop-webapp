@@ -13,8 +13,8 @@
           <input class="taskinput" type="text" autocomplete="off" placeholder="Create a new task or Search for existing one" v-model="task" name="task">
         </form>
            <transition-group name="list-complete" tag="ul">
-            <div class="li-container" v-for="(data, index) in computedList" :key="data.task_id" v-bind:data-index="index" v-bind:class="deleting.includes(data.task_id) ? 'undodiv' : ''">
-              <div class="list-item" v-if="!deleting.includes(data.task_id) && editing != data.task_id">
+            <div class="li-container" v-for="(data, index) in computedList" :key="data.task_id" v-bind:data-index="index" v-bind:class="deleting[data.task_id] ? 'undodiv' : ''">
+              <div class="list-item" v-if="!deleting[data.task_id] && editing != data.task_id">
                 <li v-if="data.task.includes('https://del.dog/')"><span v-html="linkify(data.task)"></span></li>
               <li v-else>{{data.task}}</li>
                 <i v-if="!data.task.includes('https://del.dog/')" class="fa fa-edit" v-on:click="editing = data.task_id; edittext = data.task"></i>
@@ -25,7 +25,7 @@
                 <input type="text" placeholder="Enter a task.." v-model="edittext" v-on:keyup.enter="editTask(data.task_id)" name="edit">
                 <div @click="editTask(data.task_id)"> save </div>
               </div>
-              <div v-if="deleting.includes(data.task_id)" class="removediv">
+              <div v-if="deleting[data.task_id]" class="removediv">
                 <div @click="cancelRemove(data.task_id)"> undo </div>
             </div>
             </div>
@@ -47,7 +47,7 @@ export default {
       userid: this.$parent.userhash,
       task: '',
       editing: -1,
-      deleting: [],
+      deleting: {},
       edittext: '',
       tasks: [],
       isloading: false,
@@ -157,25 +157,22 @@ export default {
     },
 
     removeTimed(taskid) {
-      this.deleting.push(taskid)
-      setTimeout(this._delete, 5000, taskid)
+      var timeoutid = setTimeout(this._delete, 2000, taskid)
+      this.$set(this.deleting, taskid, timeoutid)
     },
 
     cancelRemove(taskid) {
-      const index = this.deleting.indexOf(taskid)
-      if (index > -1) {
-        this.deleting.splice(index, 1);
-      }
+      var timeoutid = this.deleting[taskid]
+      clearTimeout(timeoutid)
     },
 
     _delete(taskid) {
-      if(this.deleting.includes(taskid)) {
+      delete this.deleting[taskid]
        var index = this.tasks.findIndex( function (item) {
           return item.task_id == taskid
        });
-       const task_id = this.tasks[index].task_id;
-        this.cancelRemove(taskid)
-       axios.delete( baseurl + this.userid + '/' + task_id  );
+       if(index > -1) {
+         axios.delete( baseurl + this.userid + '/' + taskid  );
        this.tasks.splice(index, 1);
       }
     }
@@ -185,10 +182,12 @@ export default {
       this.getAll();
     },
 
-    watch: {
-      task: function (val) {
-        if(val == '') {
-          this.filtertable = this.tasks
+    beforeDestroy() {
+      for (const key in this.deleting) {
+        if (this.deleting.hasOwnProperty(key)) {
+          const timeoutid = this.deleting[key];
+          clearTimeout(timeoutid)
+          axios.delete( baseurl + this.userid + '/' + key);
         }
       }
     },
