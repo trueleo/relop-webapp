@@ -195,6 +195,7 @@ export default {
     padding-top: 12em;
     background-color: rgb(255, 255, 255);
     border-radius: 50%;
+    box-shadow: 0 0 0 5px #285a88;
   }
 
   .avatar img {
@@ -203,7 +204,6 @@ export default {
     border-radius: 50%;
     width: inherit;
     height: inherit;
-    box-shadow: 0 0 1px 0px rgba(255, 255, 255, 0) inset, 0 0 1px 0px rgba(255, 255, 255, 0), 0 0 0 5px #285a88;
   }
 
 
