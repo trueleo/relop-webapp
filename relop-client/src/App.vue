@@ -8,7 +8,7 @@
     <router-link to="/login" v-on:click.native="logout()" replace>logout</router-link>
 </nav>
 <!-- </transition> -->
-<transition name="naav-anim" enter-active-class="animated slideInRight fast" leave-active-class="animated fadeOutDown fast" >
+<transition name="naav-anim" enter-active-class="animated slideInRight faster" leave-active-class="animated slideOutLeft faster" >
   <router-view @authenticated="setAuthenticated" @signoff="logout"> </router-view>
 </transition>
 </div>
