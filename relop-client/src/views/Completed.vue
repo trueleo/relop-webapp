@@ -10,8 +10,8 @@
         </div>
         <input type="text" autocomplete="off" v-model="searchtext" @input="filter()" placeholder="Search..." >
         <div class="container">
-            <ul v-if="filtertable.length > 0">
-                <li v-for="(data, index) in filtertable" :key="index">
+            <ul v-if="computedlist.length > 0">
+                <li v-for="(data, index) in computedlist" :key="index">
                     <div>
                         <span class="circle"></span>
                         <div class="info">{{data.task}}</div>
@@ -41,16 +41,25 @@ export default {
         return {
             userid: this.$parent.userhash,
             table: [],
-            filtertable: [],
             searchtext: '',
             isloading: false
         }
     },
 
+    computed: {
+      computedlist() {
+       var vm = this;
+       return vm.table.filter(this.filter)
+      }
+    },
+
     methods: {
         getCompleted() {
-            this.isloading = true
+          var timeout = setTimeout(() => {
+              this.isloading = true
+            }, 3000);
             axios.get(baseurl + this.userid + '?status=done').then(response => {
+                clearTimeout(timeout)
                 var data = response.data;
                 this.table = [];
                 data.forEach(element => {
@@ -60,10 +69,10 @@ export default {
                 this.table.sort(function (a,b) {
                   return b.timestamp - a.timestamp
                 })
-                this.filtertable = this.table;
                 this.isloading = false;
             });
         },
+
         matchdate(timestamp, searchtext) {
                var included = 0;
                const day = {
@@ -102,21 +111,14 @@ export default {
                  return true
                }
         },
-       filter() {
-        if ( this.searchtext == '' ) {
-            this.filtertable = this.table;
-        }
-        else {
-         var newtable = [];
-         this.table.forEach(element => {
+
+        filter(element) {
              if ( element.task.toLowerCase().includes(this.searchtext.toLowerCase()) || this.matchdate(element.timestamp, this.searchtext)) {
-                 newtable.push(element);
+                 return element;
              }
-         });
-         this.filtertable = newtable
         }
-       }
     },
+
     created() {
         this.getCompleted();
     },
