@@ -63,10 +63,12 @@ export default {
      }
    },
     methods: {
+
     linkify(text) {
       var n = text.indexOf('https://del.dog/');
       return text.slice(0,60) + '...<a style="text-decoration: none; color: #5eabed; " href="' + text.slice(n, n+26) + '" target="_blank">' + 'more ' + '</a>'
     },
+
     holdertext() {
       if( this.task != '') {
         if( this.computedList.length < 1 && this.tasks.length > 0 )

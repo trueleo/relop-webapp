@@ -14,7 +14,8 @@
                 <li v-for="(data, index) in computedlist" :key="index">
                     <div>
                         <span class="circle"></span>
-                        <div class="info">{{data.task}}</div>
+                        <div v-if="data.task.includes('https://del.dog/')" class="info"><span v-html="linkify(data.task)"></span></div>
+                        <div v-else class="info">{{data.task}}</div>
                         <span class="number">
                             <span> {{data.timestamp.toString().split(' ')[4].substring(0,5)}} </span>
                             <span> {{data.timestamp.toString().split(' ')[2] + " " + data.timestamp.toString().split(' ')[1]}} </span>
@@ -54,6 +55,12 @@ export default {
     },
 
     methods: {
+
+        linkify(text) {
+          var n = text.indexOf('https://del.dog/');
+          return text.slice(0,60) + '...<a style="text-decoration: none; color: #5eabed; " href="' + text.slice(n, n+26) + '" target="_blank">' + 'more ' + '</a>'
+        },
+
         getCompleted() {
           var timeout = setTimeout(() => {
               this.isloading = true
