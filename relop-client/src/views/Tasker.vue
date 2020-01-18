@@ -159,12 +159,13 @@ export default {
     },
 
     removeTimed(taskid) {
-      var timeoutid = setTimeout(this._delete, 2000, taskid)
+      var timeoutid = setTimeout(this._delete, 2700, taskid)
       this.$set(this.deleting, taskid, timeoutid)
     },
 
     cancelRemove(taskid) {
       var timeoutid = this.deleting[taskid]
+      this.$delete(this.deleting, taskid)
       clearTimeout(timeoutid)
     },
 
