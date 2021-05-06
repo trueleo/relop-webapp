@@ -1,6 +1,6 @@
 connexion==2.3.0
 Flask==1.1.1
-flask_cors==3.0.8
+flask_cors==3.0.9
 flask_marshmallow==0.10.1
 flask_sqlalchemy==2.4.1
 marshmallow_sqlalchemy==0.19.0
